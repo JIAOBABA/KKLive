@@ -50,5 +50,6 @@ public class DirectSeedingFragment extends BaseFragment {
         mAdapter = new DirectSeedingAdapter(getChildFragmentManager(),data,title);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+
     }
 }
