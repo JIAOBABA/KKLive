@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.kk.kklive.R;
 import com.kk.kklive.ui.fragments.DirectSeedingFragment;
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        Toast.makeText(MainActivity.this, "王飞大傻吊", Toast.LENGTH_SHORT).show();
     }
 
     private void initView() {
