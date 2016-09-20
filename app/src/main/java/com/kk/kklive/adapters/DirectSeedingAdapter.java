@@ -13,14 +13,16 @@ import java.util.List;
 public class DirectSeedingAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> data;
+    private String [] title;
 
-    public DirectSeedingAdapter(FragmentManager fm,List<Fragment> data) {
+    public DirectSeedingAdapter(FragmentManager fm,List<Fragment> data,String [] title) {
         super(fm);
-        if (this.data!=null) {
+        if (data!=null) {
             this.data = data;
         }else {
             this.data = new ArrayList<>();
         }
+        this.title = title;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class DirectSeedingAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return super.getPageTitle(position);
+        return title[position];
     }
 
 }
