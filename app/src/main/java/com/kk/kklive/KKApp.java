@@ -22,6 +22,6 @@ public class KKApp extends Application {
         // 初始化teachlibrary
         ImageLoader.init(this);
 
-        SMSSDK.initSDK(this, "174b5e51bb113", "2b545c3e2261c6eb50fa783a30475869");
+        SMSSDK.initSDK(this, "174c65ea17247", "cbc4fdbe3932145a36c40cc7ec04f398");
     }
 }

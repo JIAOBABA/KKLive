@@ -130,25 +130,25 @@
             android:id="@+id/login_qq"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:src="@mipmap/kk_login_qq_icon_normal"/>
         <ImageView
             android:id="@+id/login_weixin"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:src="@mipmap/kk_login_weixin_icon_normal"/>
         <ImageView
             android:id="@+id/login_weibo"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:src="@mipmap/kk_login_weibo_icon_normal"/>
         <ImageView
             android:id="@+id/login_alipay"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:src="@mipmap/kk_login_alipay_icon_normal"/>
     </LinearLayout>
     <TextView
