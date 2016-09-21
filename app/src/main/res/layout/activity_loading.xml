@@ -8,6 +8,7 @@
     android:background="@mipmap/kk_login_background"
     tools:context="com.kk.kklive.ui.mine.LoadingActivity">
     <ImageView
+        android:id="@+id/login_close"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@mipmap/kk_game_vertical_exit_room"
@@ -30,6 +31,7 @@
             android:src="@mipmap/kk_edit_phone_icon"
             android:padding="5dp"/>
         <EditText
+            android:id="@+id/login_et_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="手机号"
@@ -55,6 +57,7 @@
             android:padding="5dp"
             android:src="@mipmap/kk_edit_lock_icon"/>
         <EditText
+            android:id="@+id/login_et_pwd"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="match_parent"
@@ -62,6 +65,7 @@
             android:textColorHint="#f2eded"
             android:inputType="textPassword"/>
         <Button
+            android:id="@+id/login_btn_code"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -82,9 +86,11 @@
         android:textColor="#ffffff"
         android:gravity="center"/>
     <Button
+        android:id="@+id/login_btn_logining"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="登录"
+        android:background="@drawable/login_logining"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"/>
     <LinearLayout
@@ -98,10 +104,11 @@
             android:layout_weight="1"
             android:layout_height="match_parent"/>
         <TextView
+            android:id="@+id/login_txt_account_login"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="手机号快捷登录"
+            android:text="XX账号登录"
             android:textColor="#ffffff"
             android:gravity="center|right"/>
         <ImageView
@@ -120,25 +127,29 @@
         android:gravity="bottom"
         android:padding="20dp">
         <ImageView
+            android:id="@+id/login_qq"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/kk_login_qq_icon_normal"/>
         <ImageView
+            android:id="@+id/login_weixin"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/kk_login_weixin_icon_normal"/>
         <ImageView
+            android:id="@+id/login_weibo"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/kk_login_weibo_icon_normal"/>
         <ImageView
+            android:id="@+id/login_alipay"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/kk_login_alipay_icon_normal"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

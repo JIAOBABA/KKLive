@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/mine_one_item_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/mine_one_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="主播名字"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:layout_marginStart="23dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/mine_one_item_image"/>
+
+    <TextView
+        android:id="@+id/mine_one_item_count"
+        android:layout_width="60dp"
+        android:layout_height="25dp"
+        android:text="人气数"
+        android:textSize="12sp"
+        android:textColor="#afc16005"
+        android:padding="5dp"
+        android:layout_below="@+id/mine_one_item_name"
+        android:layout_toEndOf="@+id/mine_one_item_image"/>
+
+    <TextView
+        android:id="@+id/mine_one_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="开播时间"
+        android:textSize="12sp"
+        android:padding="5dp"
+        android:layout_below="@+id/mine_one_item_name"
+        android:layout_toEndOf="@+id/mine_one_item_count"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:id="@+id/mine_one_item_image_attention"
+        android:src="@mipmap/kk_video_v_attention_n"
+        android:layout_margin="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>
