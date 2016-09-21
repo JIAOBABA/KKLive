@@ -201,20 +201,20 @@ public class DynamicHotFragment extends Fragment {
             textViewContent.setText(mRecommendData.get(i).getContent());
             x.image().bind(imageView,HttpConstant.IMAGE_BASE_PATH+mRecommendData.get(i).getPortrait_path_256(), KKApp.getOptions2());
 
-
-
-            x.image().bind(imageView1,HttpConstant.IMAGE_BASE_PATH+mRecommendData.get(i).getPicArray().get(0).getImageUrl_400(),KKApp.getOptions());
-
             ViewGroup.LayoutParams params = imageView1.getLayoutParams();
-            params.width = width/2;
-            params.height = width/2;
+            params.width = 2*width/3;
+            params.height = 2*width/3;
             imageView1.setLayoutParams(params);
+            imageView1.setScaleType(ImageView.ScaleType.FIT_XY);
+            x.image().bind(imageView1,HttpConstant.IMAGE_BASE_PATH+mRecommendData.get(i).getPicArray().get(0).getImageUrl_720(),KKApp.getOptions());
+
+
 
             final int finalI = i;
             imageView1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    previewImageView(finalI,HttpConstant.IMAGE_BASE_PATH+mRecommendData.get(finalI).getPicArray().get(0).getImageUrl_400());
+                    previewImageView(finalI,HttpConstant.IMAGE_BASE_PATH+mRecommendData.get(finalI).getPicArray().get(0).getImageUrl_720());
                 }
             });
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日");
@@ -253,6 +253,9 @@ public class DynamicHotFragment extends Fragment {
         for (int i = 0; i < mHeadData.size(); i++) {
             View headViewItem = LayoutInflater.from(getActivity()).inflate(R.layout.item_dynamichot_headview_item,null);
             ImageView imageView = (ImageView) headViewItem.findViewById(R.id.iv_hot_headview_image);
+            LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(240, 200);
+            params1.setMargins(5,0,0,0);
+            imageView.setLayoutParams(params1);
             TextView tv = (TextView) headViewItem.findViewById(R.id.tv_hot_headview_content);
             if (mHeadData.get(i).getImageUrl()!= null) {
                 x.image().bind(imageView, mHeadData.get(i).getImageUrl(), KKApp.getOptions());
@@ -279,8 +282,8 @@ public class DynamicHotFragment extends Fragment {
             x.image().bind(imageView,HttpConstant.IMAGE_BASE_PATH+mHotNewsData.get(i).getPortrait_path_256(),KKApp.getOptions2());
             x.image().bind(imageView1,path,KKApp.getOptions());
             ViewGroup.LayoutParams params = imageView1.getLayoutParams();
-            params.width = width/2;
-            params.height = width/2;
+            params.width = 2*width/3;
+            params.height = 2*width/3;
             imageView1.setLayoutParams(params);
 
             final int finalI = i;

@@ -1,5 +1,6 @@
 package com.kk.kklive.ui;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import com.kk.kklive.ui.fragments.DirectSeedingFragment;
 import com.kk.kklive.ui.fragments.DynamicFragment;
 import com.kk.kklive.ui.fragments.MineFragment;
 import com.kk.kklive.ui.fragments.NewsFragment;
+import com.kk.kklive.ui.live.LiveActivity;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -89,6 +91,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onClick(View v) {
-
+        Intent intent = new Intent(this, LiveActivity.class);
+        startActivity(intent);
     }
 }
