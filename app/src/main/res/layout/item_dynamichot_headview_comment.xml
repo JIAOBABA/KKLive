@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+    <View
+        android:background="#cccccb"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/kk_comment_leftflag"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:textSize="30dp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:text="热门评论"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#f7bc0c"
+            android:text="换一换"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.kk.kklive.views.FlowLayout
+        android:id="@+id/flowlayout_dynamichot_hotcomment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.kk.kklive.views.FlowLayout>
+</LinearLayout>

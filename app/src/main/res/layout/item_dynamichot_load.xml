@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="5dp"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+    <View
+        android:background="#cccccb"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <ImageView
+
+            android:id="@+id/iv_dynamichot_headview_hotnews1"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <TextView
+            android:id="@+id/tv_dynamichot_headview_hotnews_title1"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_dynamichot_headview_hotnews1"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/tv_dynamichot_headview_hotnews_title1"
+            android:id="@+id/tv_dynamichot_headview_hotnews_time1"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_dynamichot_headview_hotnews1"
+            android:textSize="20dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:padding="10dp"
+            android:layout_alignParentRight="true"
+            android:textColor="#fcaa06"
+            android:textSize="20dp"
+            android:text="+ 关注"
+            android:background="@drawable/attentionborder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_dynamichot_headview_hotnews_content1"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.kk.kklive.views.FlowLayout
+        android:id="@+id/flowlayout_dynamichot_comment1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.kk.kklive.views.FlowLayout>
+
+    <com.kk.kklive.views.FlowLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/flowlayout_dynamichot_comment2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.kk.kklive.views.FlowLayout>
+
+</LinearLayout>

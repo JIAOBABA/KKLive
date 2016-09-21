@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:id="@+id/iv_item_mine_author"
+        android:background="@mipmap/kk_head_avatar_women"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/iv_item_mine_author"
+        android:id="@+id/tv_item_mine_name"
+        android:text="anthorname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="#fdbf03"
+        android:text="79387"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/iv_item_mine_author"
+        android:drawableLeft="@mipmap/kk_most_hot_pressed"
+        android:id="@+id/tv_item_mine_onlinecount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/tv_item_mine_onlinecount"
+        android:id="@+id/tv_item_mine_playtime"
+        android:text="已开播1小时"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

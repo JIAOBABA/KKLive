@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#000"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:background="@mipmap/lsq_style_default_album_cover_empty"
+            android:id="@+id/iv_preview_image1"
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/pb_preview_load"
+                android:layout_below="@id/iv_preview_image1"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_below="@id/iv_preview_image1"
+                android:textColor="#fff"
+                android:textSize="30dp"
+                android:text="正在加载....."
+                android:layout_toRightOf="@id/pb_preview_load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/iv_preview_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</FrameLayout>
