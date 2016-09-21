@@ -41,6 +41,7 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
                 .setSquare(true)
                 .setRadius(10)
                 .setLoadingDrawableId(R.mipmap.kk_room_honor_default_icon)
+                .setFailureDrawableId(R.mipmap.kk_room_honor_none_img)
                 .build();
     }
 
