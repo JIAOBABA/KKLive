@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.kk.kklive.R;
 import com.kk.kklive.adapters.OneMineAdapter;
+import com.kk.kklive.event.NickNameEvent;
 import com.kk.kklive.minemodel.RoomLists;
 import com.kk.kklive.ui.mine.FourMineFragment;
 import com.kk.kklive.ui.mine.HomeActivity;
@@ -32,7 +33,10 @@ import com.kk.kklive.ui.mine.OneMineFragment;
 import com.kk.kklive.ui.mine.SettingActivity;
 import com.kk.kklive.ui.mine.ThreeMineFragment;
 import com.kk.kklive.ui.mine.TwoMineFragment;
+import com.squareup.picasso.Picasso;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -109,6 +113,7 @@ public class MineFragment extends BaseFragment implements RadioGroup.OnCheckedCh
         mAdapter = new OneMineAdapter(getContext(),null,R.layout.one_mine_item);
         mListView.setAdapter(mAdapter);
         setData();
+
     }
 
     private void setData() {
@@ -241,5 +246,24 @@ public class MineFragment extends BaseFragment implements RadioGroup.OnCheckedCh
                 break;
         }
         return false;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 注册
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 取消注册
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe
+    public void onEvent(NickNameEvent event){
+        mTextLogin.setText(event.getNickname().toString());
+        Picasso.with(getContext()).load(event.getFigureurl_2().toString()).into(mImageLogin);
+
     }
 }

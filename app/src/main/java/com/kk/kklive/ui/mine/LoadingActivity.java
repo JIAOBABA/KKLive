@@ -8,18 +8,32 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.kk.kklive.R;
+import com.kk.kklive.event.NickNameEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
+import java.util.Set;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.RegisterPage;
 
-public class LoadingActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoadingActivity extends AppCompatActivity implements View.OnClickListener, PlatformActionListener {
 
     private Button mSMSCode;
     private ImageView mClose;
     private Button mCommit;
+    private ImageView mQQ;
+    private ImageView mWeiXin;
+    private ImageView mSina;
+    private ImageView mALi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +50,14 @@ public class LoadingActivity extends AppCompatActivity implements View.OnClickLi
         mCommit = (Button) findViewById(R.id.login_btn_logining);
         mCommit.setOnClickListener(this);
 
+        mQQ = (ImageView) findViewById(R.id.login_qq);
+        mQQ.setOnClickListener(this);
+        mWeiXin = (ImageView) findViewById(R.id.login_weixin);
+        mWeiXin.setOnClickListener(this);
+        mSina = (ImageView) findViewById(R.id.login_weibo);
+        mSina.setOnClickListener(this);
+        mALi = (ImageView) findViewById(R.id.login_alipay);
+        mALi.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +73,18 @@ public class LoadingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.login_btn_logining:
                 Intent intent = new Intent(this, SettingActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.login_qq:
+                goLoading(QQ.NAME);
+                break;
+            case R.id.login_weixin:
+                goLoading(Wechat.NAME);
+                break;
+            case R.id.login_weibo:
+                goLoading(SinaWeibo.NAME);
+                break;
+            case R.id.login_alipay:
+                goLoading(QQ.NAME);
                 break;
         }
     }
@@ -74,4 +108,37 @@ public class LoadingActivity extends AppCompatActivity implements View.OnClickLi
         });
         registerPage.show(this);
     }
+
+    public void goLoading(String name){
+        ShareSDK.initSDK(this);
+        Platform weibo = ShareSDK.getPlatform(this,name);
+        weibo.setPlatformActionListener(this);
+        weibo.authorize();//单独授权
+        weibo.showUser(null);//授权并获取用户信息
+        //authorize与showUser单独调用一个即可
+        //移除授权
+        //weibo.removeAccount(true);
+    }
+
+    @Override
+    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        Set<String> keySet = hashMap.keySet();
+        Object nickname = hashMap.get("nickname");
+        Object figureurl2 = hashMap.get("figureurl_2");
+        NickNameEvent event = new NickNameEvent(1000);
+        event.setNickname(nickname);
+        event.setNickname(figureurl2);
+        EventBus.getDefault().post(event);
+    }
+
+    @Override
+    public void onError(Platform platform, int i, Throwable throwable) {
+
+    }
+
+    @Override
+    public void onCancel(Platform platform, int i) {
+
+    }
+
 }
