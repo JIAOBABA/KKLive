@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:background="#2dbc05"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-</LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/channel_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+            android:id="@+id/channel_sticky_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="outsideOverlay"
+            android:fastScrollEnabled="true"
+            android:clipToPadding="false"
+            android:drawSelectorOnTop="true"
+            android:overScrollMode="never">
+
+        </se.emilsjolander.stickylistheaders.StickyListHeadersListView>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,232 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* build.xml
+* build\
+* build\generated\
+* build\generated\source\
+* build\generated\source\buildConfig\
+* build\generated\source\buildConfig\androidTest\
+* build\generated\source\buildConfig\androidTest\debug\
+* build\generated\source\buildConfig\androidTest\debug\se\
+* build\generated\source\buildConfig\androidTest\debug\se\emilsjolander\
+* build\generated\source\buildConfig\androidTest\debug\se\emilsjolander\stickylistheaders\
+* build\generated\source\buildConfig\androidTest\debug\se\emilsjolander\stickylistheaders\test\
+* build\generated\source\buildConfig\androidTest\debug\se\emilsjolander\stickylistheaders\test\BuildConfig.java
+* build\generated\source\buildConfig\debug\
+* build\generated\source\buildConfig\debug\se\
+* build\generated\source\buildConfig\debug\se\emilsjolander\
+* build\generated\source\buildConfig\debug\se\emilsjolander\stickylistheaders\
+* build\generated\source\buildConfig\debug\se\emilsjolander\stickylistheaders\BuildConfig.java
+* build\generated\source\buildConfig\release\
+* build\generated\source\buildConfig\release\se\
+* build\generated\source\buildConfig\release\se\emilsjolander\
+* build\generated\source\buildConfig\release\se\emilsjolander\stickylistheaders\
+* build\generated\source\buildConfig\release\se\emilsjolander\stickylistheaders\BuildConfig.java
+* build\generated\source\r\
+* build\generated\source\r\androidTest\
+* build\generated\source\r\androidTest\debug\
+* build\generated\source\r\androidTest\debug\se\
+* build\generated\source\r\androidTest\debug\se\emilsjolander\
+* build\generated\source\r\androidTest\debug\se\emilsjolander\stickylistheaders\
+* build\generated\source\r\androidTest\debug\se\emilsjolander\stickylistheaders\R.java
+* build\generated\source\r\androidTest\debug\se\emilsjolander\stickylistheaders\test\
+* build\generated\source\r\androidTest\debug\se\emilsjolander\stickylistheaders\test\R.java
+* build\generated\source\r\debug\
+* build\generated\source\r\debug\se\
+* build\generated\source\r\debug\se\emilsjolander\
+* build\generated\source\r\debug\se\emilsjolander\stickylistheaders\
+* build\generated\source\r\debug\se\emilsjolander\stickylistheaders\R.java
+* build\generated\source\r\release\
+* build\generated\source\r\release\se\
+* build\generated\source\r\release\se\emilsjolander\
+* build\generated\source\r\release\se\emilsjolander\stickylistheaders\
+* build\generated\source\r\release\se\emilsjolander\stickylistheaders\R.java
+* build\intermediates\
+* build\intermediates\blame\
+* build\intermediates\blame\res\
+* build\intermediates\blame\res\androidTest\
+* build\intermediates\blame\res\androidTest\debug\
+* build\intermediates\blame\res\androidTest\debug\multi\
+* build\intermediates\blame\res\androidTest\debug\multi\values.json
+* build\intermediates\bundles\
+* build\intermediates\bundles\debug\
+* build\intermediates\bundles\debug\AndroidManifest.xml
+* build\intermediates\bundles\debug\R.txt
+* build\intermediates\bundles\debug\aapt\
+* build\intermediates\bundles\debug\aapt\AndroidManifest.xml
+* build\intermediates\bundles\debug\classes.jar
+* build\intermediates\bundles\debug\res\
+* build\intermediates\bundles\debug\res\values\
+* build\intermediates\bundles\debug\res\values\values.xml
+* build\intermediates\bundles\release\
+* build\intermediates\bundles\release\AndroidManifest.xml
+* build\intermediates\bundles\release\R.txt
+* build\intermediates\bundles\release\aapt\
+* build\intermediates\bundles\release\aapt\AndroidManifest.xml
+* build\intermediates\bundles\release\classes.jar
+* build\intermediates\bundles\release\res\
+* build\intermediates\bundles\release\res\values\
+* build\intermediates\bundles\release\res\values\values.xml
+* build\intermediates\classes\
+* build\intermediates\classes\debug\
+* build\intermediates\classes\debug\se\
+* build\intermediates\classes\debug\se\emilsjolander\
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\AdapterWrapper$1.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\AdapterWrapper$2.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\AdapterWrapper$OnHeaderClickListener.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\AdapterWrapper.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\BuildConfig.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\CheckableWrapperView.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\DistinctMultiHashMap$1.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\DistinctMultiHashMap$IDMapper.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\DistinctMultiHashMap.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\DualHashMap.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersAdapter.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersListView$1.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersListView$IAnimationExecutor.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersListView.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\R$attr.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\R$styleable.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\R.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\SectionIndexerAdapterWrapper.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersAdapter.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$1.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$2.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$3.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$AdapterWrapperDataSetObserver.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$AdapterWrapperHeaderClickHandler.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$OnHeaderClickListener.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$OnStickyHeaderChangedListener.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$OnStickyHeaderOffsetChangedListener.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$WrapperListScrollListener.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView$WrapperViewListLifeCycleListener.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\StickyListHeadersListView.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\WrapperView.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\WrapperViewList$LifeCycleListener.class
+* build\intermediates\classes\debug\se\emilsjolander\stickylistheaders\WrapperViewList.class
+* build\intermediates\classes\release\
+* build\intermediates\classes\release\se\
+* build\intermediates\classes\release\se\emilsjolander\
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\AdapterWrapper$1.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\AdapterWrapper$2.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\AdapterWrapper$OnHeaderClickListener.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\AdapterWrapper.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\BuildConfig.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\CheckableWrapperView.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\DistinctMultiHashMap$1.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\DistinctMultiHashMap$IDMapper.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\DistinctMultiHashMap.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\DualHashMap.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersAdapter.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersListView$1.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersListView$IAnimationExecutor.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\ExpandableStickyListHeadersListView.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\R$attr.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\R$styleable.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\R.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\SectionIndexerAdapterWrapper.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersAdapter.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$1.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$2.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$3.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$AdapterWrapperDataSetObserver.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$AdapterWrapperHeaderClickHandler.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$OnHeaderClickListener.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$OnStickyHeaderChangedListener.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$OnStickyHeaderOffsetChangedListener.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$WrapperListScrollListener.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView$WrapperViewListLifeCycleListener.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\StickyListHeadersListView.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\WrapperView.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\WrapperViewList$LifeCycleListener.class
+* build\intermediates\classes\release\se\emilsjolander\stickylistheaders\WrapperViewList.class
+* build\intermediates\incremental-safeguard\
+* build\intermediates\incremental-safeguard\debug\
+* build\intermediates\incremental-safeguard\debug\tag.txt
+* build\intermediates\incremental-safeguard\release\
+* build\intermediates\incremental-safeguard\release\tag.txt
+* build\intermediates\incremental\
+* build\intermediates\incremental\compileDebugAidl\
+* build\intermediates\incremental\compileDebugAidl\dependency.store
+* build\intermediates\incremental\compileDebugAndroidTestAidl\
+* build\intermediates\incremental\compileDebugAndroidTestAidl\dependency.store
+* build\intermediates\incremental\compileReleaseAidl\
+* build\intermediates\incremental\compileReleaseAidl\dependency.store
+* build\intermediates\incremental\mergeDebugAndroidTestAssets\
+* build\intermediates\incremental\mergeDebugAndroidTestAssets\merger.xml
+* build\intermediates\incremental\mergeDebugAndroidTestResources\
+* build\intermediates\incremental\mergeDebugAndroidTestResources\merger.xml
+* build\intermediates\incremental\mergeDebugAndroidTestShaders\
+* build\intermediates\incremental\mergeDebugAndroidTestShaders\merger.xml
+* build\intermediates\incremental\mergeDebugAssets\
+* build\intermediates\incremental\mergeDebugAssets\merger.xml
+* build\intermediates\incremental\mergeDebugJniLibFolders\
+* build\intermediates\incremental\mergeDebugJniLibFolders\merger.xml
+* build\intermediates\incremental\mergeDebugShaders\
+* build\intermediates\incremental\mergeDebugShaders\merger.xml
+* build\intermediates\incremental\mergeReleaseAssets\
+* build\intermediates\incremental\mergeReleaseAssets\merger.xml
+* build\intermediates\incremental\mergeReleaseJniLibFolders\
+* build\intermediates\incremental\mergeReleaseJniLibFolders\merger.xml
+* build\intermediates\incremental\mergeReleaseShaders\
+* build\intermediates\incremental\mergeReleaseShaders\merger.xml
+* build\intermediates\incremental\packageDebugResources\
+* build\intermediates\incremental\packageDebugResources\merger.xml
+* build\intermediates\incremental\packageReleaseResources\
+* build\intermediates\incremental\packageReleaseResources\merger.xml
+* build\intermediates\manifest\
+* build\intermediates\manifest\androidTest\
+* build\intermediates\manifest\androidTest\debug\
+* build\intermediates\manifest\androidTest\debug\AndroidManifest.xml
+* build\intermediates\res\
+* build\intermediates\res\merged\
+* build\intermediates\res\merged\androidTest\
+* build\intermediates\res\merged\androidTest\debug\
+* build\intermediates\res\merged\androidTest\debug\values\
+* build\intermediates\res\merged\androidTest\debug\values\values.xml
+* build\intermediates\res\resources-debug-androidTest.ap_
+* build\intermediates\symbols\
+* build\intermediates\symbols\androidTest\
+* build\intermediates\symbols\androidTest\debug\
+* build\intermediates\symbols\androidTest\debug\R.txt
+* build\outputs\
+* build\outputs\aar\
+* build\outputs\aar\library-debug.aar
+* build\outputs\aar\library-release.aar
+* library.iml
+* pom.xml
+* proguard-project.txt
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => stickylibrary\src\main\AndroidManifest.xml
+* res\ => stickylibrary\src\main\res\
+* src\ => stickylibrary\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
