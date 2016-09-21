@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.kk.kklive.R;
 
 /**
+ * 热门碎片
  * Created by fei on 2016/9/20.
  */
 public class HotFragment extends BaseFragment {

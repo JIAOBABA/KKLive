@@ -30,13 +30,13 @@ public class DirectSeedingFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         layout = inflater.inflate(R.layout.fragment_direct_seeding,container,false);
-        initView();
         return layout;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initView();
     }
 
     private void initView() {
@@ -50,6 +50,5 @@ public class DirectSeedingFragment extends BaseFragment {
         mAdapter = new DirectSeedingAdapter(getChildFragmentManager(),data,title);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
     }
 }
