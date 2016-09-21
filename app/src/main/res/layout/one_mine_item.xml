@@ -24,6 +24,12 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/mine_one_item_image"/>
 
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/kk_most_hot_pressed"
+        android:layout_below="@+id/mine_one_item_name"
+        android:layout_toEndOf="@+id/mine_one_item_image"/>
     <TextView
         android:id="@+id/mine_one_item_count"
         android:layout_width="60dp"
@@ -33,7 +39,7 @@
         android:textColor="#afc16005"
         android:padding="5dp"
         android:layout_below="@+id/mine_one_item_name"
-        android:layout_toEndOf="@+id/mine_one_item_image"/>
+        android:layout_alignStart="@+id/mine_one_item_name"/>
 
     <TextView
         android:id="@+id/mine_one_item_time"
