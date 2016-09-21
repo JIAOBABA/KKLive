@@ -82,7 +82,7 @@ public class NewsSecondActivity extends BaseActivity implements View.OnClickList
                 MessageLists messageLists = gson.fromJson(result, MessageLists.class);
                 mAdapter.update(messageLists.getMessageList());
                 mBackGround.setVisibility(View.GONE);
-                Log.e(TAG, "onSuccess: "+result );
+//                Log.e(TAG, "onSuccess: "+result );
             }
 
             @Override
