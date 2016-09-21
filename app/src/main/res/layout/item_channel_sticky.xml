@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:background="#fff"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -13,7 +14,9 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="2dp"
             android:orientation="vertical">
 
             <FrameLayout
@@ -32,6 +35,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
+                    android:singleLine="true"
+                    android:layout_margin="3dp"
                     android:layout_gravity="bottom|left"/>
 
             </FrameLayout>
@@ -54,7 +59,9 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="8dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -72,6 +79,8 @@
                 <TextView
                     android:id="@+id/item_channel_sticky_roomTheme2"
                     android:textColor="#fff"
+                    android:singleLine="true"
+                    android:layout_margin="3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"/>
@@ -103,7 +112,9 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="2dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -123,6 +134,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
+                    android:singleLine="true"
+                    android:layout_margin="3dp"
                     android:layout_gravity="bottom|left"/>
 
             </FrameLayout>
@@ -145,7 +158,9 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="8dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -165,6 +180,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
+                    android:singleLine="true"
+                    android:layout_margin="3dp"
                     android:layout_gravity="bottom|left"/>
 
             </FrameLayout>
@@ -185,5 +202,10 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#f5f0f0"/>
 
 </LinearLayout>
