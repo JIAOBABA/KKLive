@@ -44,7 +44,9 @@ public class NewsAdapter extends TeachMultiTypeBaseAdapter<MessageList> {
 
         Picasso.with(mContext).load(messageList.getImg())
                 .placeholder(R.mipmap.loading_1)
+                .error(R.mipmap.kk_bang_loading)
                 .into(mImage);
+
         long time = Long.valueOf(messageList.getMsgtime());
         Date date = new Date(time);
         String format = new SimpleDateFormat("MM月dd日").format(date);

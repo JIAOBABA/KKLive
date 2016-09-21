@@ -242,6 +242,7 @@ public class MineFragment extends BaseFragment implements RadioGroup.OnCheckedCh
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case 100:
+                mBi.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.bi_anim));
                 mHandler.sendEmptyMessageDelayed(100,3000);
                 break;
         }

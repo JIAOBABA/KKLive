@@ -9,6 +9,7 @@ import com.kk.kklive.minemodel.RoomList;
 import com.rock.teachlibrary.adapters.TeachMultiTypeBaseAdapter;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,14 +41,24 @@ public class OneMineAdapter extends TeachMultiTypeBaseAdapter<RoomList> {
         Picasso.with(mContext).load(roomList.getPortrait_path_original()).into(mImage);
         mName.setText(roomList.getNickname());
         mCount.setText(roomList.getOnlineCount());
+
+        //得到当前的时间毫秒
+        Date dt= new Date();
+        long mmTime= dt.getTime();
         //需要格式化时间
-        long time = Long.valueOf(roomList.getLivestarttime());
+        long startTime = Long.valueOf(roomList.getLivestarttime());
+        long time = mmTime-startTime;
         long hours = (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
         String h=hours+"小时";
         long minutes = (time % (1000 * 60 * 60)) / (1000 * 60);
         String min=minutes+"分钟";
         long seconds = (time % (1000 * 60)) / 1000;
         String s=seconds+"秒";
-        mTime.setText("已开播"+h+min);
+//        mTime.setText("已开播"+h+min);
+        if (hours>=1){
+           mTime.setText("已开播"+h);
+        }else {
+            mTime.setText("已开播"+min);
+        }
     }
 }

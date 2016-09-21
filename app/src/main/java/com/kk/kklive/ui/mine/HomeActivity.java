@@ -24,7 +24,8 @@ import javax.security.auth.login.LoginException;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String Home_URL=
-            "http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":1,\"c\":221,\"FuncTag\":10008001,\"platform\":2,\"start\":0,\"offset\":20}";
+            "http://api.kktv1.com:8080/meShow/entrance?parameter=" +
+                    "{\"a\":1,\"c\":221,\"FuncTag\":10008001,\"platform\":2,\"start\":0,\"offset\":20}";
     private ImageView mBack;
     private TextView mCreate;
     private PullToRefreshGridView mRefresh;

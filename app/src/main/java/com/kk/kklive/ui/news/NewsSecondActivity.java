@@ -22,12 +22,18 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class NewsSecondActivity extends BaseActivity implements View.OnClickListener {
 
+    private static long time=1474438383000L;
+
+    private static long mTime;
     public static final String NewsSecond_URL=
-            "http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":1,\"c\":221,\"FuncTag\":50006104,\"userId\":112742652,\"token\":\"A13AD3BF7D682D1414E0530C64A8C037B2\",\"platform\":2,\"perPageCount\":10,\"curPage\":1,\"msgType\":6,\"lastReadTime\":1474438383000}";
+            "http://api.kktv1.com:8080/meShow/entrance?parameter=" +
+                    "{\"a\":1,\"c\":221,\"FuncTag\":50006104,\"userId\":112742652,\"token\":\"A13AD3BF7D682D1414E0530C64A8C037B2\",\"platform\":2,\"perPageCount\":10,\"curPage\":1," +
+                    "\"msgType\":6,\"lastReadTime\":"+mTime+"+}";
     private ImageView mBack;
     private TextView mTitle;
     private String mTitleContent;
@@ -39,11 +45,14 @@ public class NewsSecondActivity extends BaseActivity implements View.OnClickList
     private List<MessageList> mData;
     private ImageView mBackGround;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_second);
-
+        Date date = new Date();
+        mTime = date.getTime();
+        Log.e(TAG, "onCreate: "+mTime );
         initView();
     }
 
@@ -65,9 +74,10 @@ public class NewsSecondActivity extends BaseActivity implements View.OnClickList
 
         mRefresh = (PullToRefreshListView) findViewById(R.id.news_second_pull_lv);
         mListView = mRefresh.getRefreshableView();
-        mAdapter = new NewsAdapter(this, null, R.layout.news_item);
-        mListView.setAdapter(mAdapter);
+
         if (mTitle.getText().equals("新闻鲜播")) {
+            mAdapter = new NewsAdapter(this, null, R.layout.news_item);
+            mListView.setAdapter(mAdapter);
             setData(NewsSecond_URL);
         }
 
@@ -114,4 +124,16 @@ public class NewsSecondActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    public List<MessageList> getData() {
+        List<MessageList>data=new ArrayList<>();
+
+        for (int i = 0; i < 30; i++) {
+            MessageList messageList=new MessageList();
+            messageList.setTitle("王大傻"+i+1);
+            messageList.setMsgtime("9月19日");
+            messageList.setMessage("王飞大傻王飞大傻王飞大傻王飞大傻王飞大傻王飞大傻王飞大傻王飞大傻王飞大傻——————》王飞就是个：请看下面");
+            data.add(messageList);
+        }
+        return data;
+    }
 }
