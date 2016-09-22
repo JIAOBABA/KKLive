@@ -24,13 +24,18 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 /**
  * Created by fei on 2016/9/21.
  */
-public class HotAdapter extends BaseAdapter implements StickyListHeadersAdapter{
+public class HotAdapter extends BaseAdapter implements StickyListHeadersAdapter, View.OnClickListener {
 
     private List<Hot.RoomListBean> data;
     private LayoutInflater inflater;
     private ImageOptions mOptions;
+    private OnItemClickListener mListener;
 
-    public HotAdapter(Context context,List<Hot.RoomListBean> data) {
+    public void setListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public HotAdapter(Context context, List<Hot.RoomListBean> data) {
         inflater = LayoutInflater.from(context);
         if (data!=null) {
             this.data = data;
@@ -105,6 +110,11 @@ public class HotAdapter extends BaseAdapter implements StickyListHeadersAdapter{
         nickName1.setText(getItem(position*2+1).getNickname());
         onLineCount1.setText(String.valueOf(getItem(position*2+1).getOnlineCount()));
 
+        icon.setOnClickListener(this);
+        icon1.setOnClickListener(this);
+        icon.setTag(position*2);
+        icon1.setTag(position*2+1);
+
         return convertView;
     }
 
@@ -126,6 +136,12 @@ public class HotAdapter extends BaseAdapter implements StickyListHeadersAdapter{
         return 1;
     }
 
+    @Override
+    public void onClick(View v) {
+        Integer position = (Integer) v.getTag();
+        mListener.onItemClick(position);
+    }
+
     class ViewHolder{
         private View convertView;
         private Map<Integer,View> mCacheViews;
@@ -145,6 +161,10 @@ public class HotAdapter extends BaseAdapter implements StickyListHeadersAdapter{
             }
             return view;
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
     }
 
 }

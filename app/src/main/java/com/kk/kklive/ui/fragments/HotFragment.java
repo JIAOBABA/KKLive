@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -36,7 +37,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * 热门碎片
  * Created by fei on 2016/9/20.
  */
-public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2,Handler.Callback {
+public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2,Handler.Callback, HotAdapter.OnItemClickListener {
 
     private static final int UPDATE_RES = 100;
     private static final long DELAY_TIME = 3 * 1000;
@@ -184,6 +185,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
 
         mAdapter = new HotAdapter(getActivity(),null);
         mStickyListHeadersListView.setAdapter(mAdapter);
+        mAdapter.setListener(this);
     }
 
     private List<Fragment> getData() {
@@ -234,5 +236,10 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(getActivity(), "被点击了"+position, Toast.LENGTH_SHORT).show();
     }
 }
