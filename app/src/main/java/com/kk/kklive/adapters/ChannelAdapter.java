@@ -1,6 +1,7 @@
 package com.kk.kklive.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,18 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 /**
  * Created by fei on 2016/9/21.
  */
-public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdapter{
+public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdapter, View.OnClickListener {
 
+    private static final String TAG = ChannelAdapter.class.getSimpleName();
     private List<Channel.PlateListBean> data;
     private List<Channel.PlateListBean.ResultBean> result;
     private LayoutInflater inflater;
     private ImageOptions mOptions;
+    private OnItemClickListener mListener;
+
+    public void setListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public ChannelAdapter(Context context, List<Channel.PlateListBean> data){
         inflater = LayoutInflater.from(context);
@@ -56,6 +63,7 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
 
     @Override
     public int getCount() {
+        Log.e(TAG, "getCount: " +data.size());
         return data!=null ? data.size() : 0;
     }
 
@@ -118,6 +126,16 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         roomTheme4.setText(getItem(position).getResult().get(3).getRoomTheme());
         x.image().bind(image4,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(3).getPortrait_path_256(),mOptions);
 
+
+        image.setOnClickListener(this);
+        image2.setOnClickListener(this);
+        image3.setOnClickListener(this);
+        image4.setOnClickListener(this);
+        image.setTag(position*4);
+        image2.setTag(position*4+1);
+        image3.setTag(position*4+2);
+        image4.setTag(position*4+3);
+
         return convertView;
     }
 
@@ -139,7 +157,14 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
 
     @Override
     public long getHeaderId(int position) {
+        Log.e(TAG, "getHeaderId: "+position );
         return position;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Integer tag = (Integer) v.getTag();
+        mListener.onItemClick(tag);
     }
 
     /**
@@ -167,6 +192,10 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
             return view;
         }
 
+    }
+
+    public interface OnItemClickListener{
+        void  onItemClick(int position);
     }
 
 }

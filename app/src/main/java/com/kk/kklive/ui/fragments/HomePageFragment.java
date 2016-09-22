@@ -15,6 +15,8 @@ import com.kk.kklive.model.Recommend;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
 /**
  * 首页碎片
  * Created by fei on 2016/9/20.
@@ -22,6 +24,7 @@ import java.util.List;
 public class HomePageFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
+    private StickyListHeadersListView mStickyListHeadersListView;
 
     @Nullable
     @Override
@@ -33,25 +36,12 @@ public class HomePageFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        initView();
+        initView();
     }
 
-//    private void initView() {
-//        mRecyclerView = (RecyclerView) layout.findViewById(R.id.home_page_recommend_recycler);
-//        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        mRecyclerView.setAdapter(new HomePageRecommendAdapter(getActivity(),getData()));
-//
-//    }
-//
-//    private List<Recommend.RoomListBean> getData() {
-//        List<Recommend.RoomListBean> data = new ArrayList<>();
-//        for (int i = 0; i < 50; i++) {
-//            Recommend.RoomListBean bean = new Recommend.RoomListBean();
-//            bean.setNickname("主播"+i);
-//            bean.setOnlineCount(12543);
-//            data.add(bean);
-//        }
-//        return data;
-//    }
+    private void initView() {
+        mStickyListHeadersListView = (StickyListHeadersListView) layout.findViewById(R.id.home_page_sticky_list);
+
+    }
+
 }

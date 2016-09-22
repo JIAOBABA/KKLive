@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kk.kklive.R;
@@ -29,7 +30,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * 频道碎片
  * Created by fei on 2016/9/20.
  */
-public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,Handler.Callback {
+public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,Handler.Callback, ChannelAdapter.OnItemClickListener {
 
     private static final String CHANNEL_URL = "http://www.kktv1.com/CDN/output/M/1/I/55000004/P/a-1_c-70036_platform-2/json.js";
     private static final int UPDATE = 100;
@@ -67,6 +68,12 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
                 Channel channel = gson.fromJson(result, Channel.class);
                 mPlateList = channel.getPlateList();
                 mHeaderAdapter.updateRes(mPlateList);
+                for (int i = 0; i < mPlateList.size(); i++) {
+                    List<Channel.PlateListBean.ResultBean> result1 = mPlateList.get(i).getResult();
+                    if (result1.size()<4) {
+                        mPlateList.remove(i);
+                    }
+                }
                 mAdapter.updateRes(mPlateList);
             }
 
@@ -109,6 +116,8 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
         mAdapter = new ChannelAdapter(getActivity(),null);
          // 绑定适配器
         mStickyListHeadersListView.setAdapter(mAdapter);
+        // 设置监听
+        mAdapter.setListener(this);
     }
 
     // 下拉刷新的监听
@@ -126,5 +135,10 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(getActivity(), "航航傻逼"+position, Toast.LENGTH_SHORT).show();
     }
 }
