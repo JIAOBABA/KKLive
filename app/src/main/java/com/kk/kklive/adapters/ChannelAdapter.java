@@ -56,8 +56,7 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
 
     @Override
     public int getCount() {
-        int count = (result.size() + 1) / 2;
-        return result!=null? count : 0;
+        return data!=null ? data.size() : 0;
     }
 
     @Override
@@ -90,6 +89,15 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         TextView onLineCount2 = (TextView) holder.getViewRes(R.id.item_channel_sticky_online_count2);
         TextView roomTheme2 = (TextView) holder.getViewRes(R.id.item_channel_sticky_roomTheme2);
 
+        ImageView image3 = (ImageView) holder.getViewRes(R.id.item_channel_sticky_image3);
+        TextView nickName3 = (TextView) holder.getViewRes(R.id.item_channel_sticky_nickname3);
+        TextView onLineCount3 = (TextView) holder.getViewRes(R.id.item_channel_sticky_online_count3);
+        TextView roomTheme3 = (TextView) holder.getViewRes(R.id.item_channel_sticky_roomTheme3);
+        ImageView image4 = (ImageView) holder.getViewRes(R.id.item_channel_sticky_image4);
+        TextView nickName4 = (TextView) holder.getViewRes(R.id.item_channel_sticky_nickname4);
+        TextView onLineCount4 = (TextView) holder.getViewRes(R.id.item_channel_sticky_online_count4);
+        TextView roomTheme4 = (TextView) holder.getViewRes(R.id.item_channel_sticky_roomTheme4);
+
         nickName.setText(getItem(position).getResult().get(0).getNickname());
         onLineCount.setText(String.valueOf(getItem(position).getResult().get(0).getOnlineCount()));
         roomTheme.setText(getItem(position).getResult().get(0).getRoomTheme());
@@ -100,24 +108,32 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         roomTheme2.setText(getItem(position).getResult().get(1).getRoomTheme());
         x.image().bind(image2,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(1).getPortrait_path_256(),mOptions);
 
+        nickName3.setText(getItem(position).getResult().get(2).getNickname());
+        onLineCount3.setText(String.valueOf(getItem(position).getResult().get(2).getOnlineCount()));
+        roomTheme3.setText(getItem(position).getResult().get(2).getRoomTheme());
+        x.image().bind(image3,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(2).getPortrait_path_256(),mOptions);
+
+        nickName4.setText(getItem(position).getResult().get(3).getNickname());
+        onLineCount4.setText(String.valueOf(getItem(position).getResult().get(3).getOnlineCount()));
+        roomTheme4.setText(getItem(position).getResult().get(3).getRoomTheme());
+        x.image().bind(image4,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(3).getPortrait_path_256(),mOptions);
+
         return convertView;
     }
 
 
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        HeaderViewHolder holder;
+        ViewHolder holder;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_channel_sticky_header,parent,false);
-            holder = new HeaderViewHolder();
-            holder.title = (TextView) convertView.findViewById(R.id.item_channel_sticky_header_title);
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }else {
-            holder = (HeaderViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-
-        CharSequence title = getItem(position).getTitle();
-        holder.title.setText(title);
+        TextView title = (TextView) holder.getViewRes(R.id.item_channel_sticky_header_title);
+        title.setText(getItem(position).getTitle());
         return convertView;
     }
 
@@ -126,10 +142,10 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         return position;
     }
 
-    class HeaderViewHolder{
-        TextView title;
-    }
-
+    /**
+     * 万能ViewHolder
+     *
+     */
     class ViewHolder{
 
         private View convertView;
