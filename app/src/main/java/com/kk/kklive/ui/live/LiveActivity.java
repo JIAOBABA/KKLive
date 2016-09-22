@@ -1,6 +1,8 @@
 package com.kk.kklive.ui.live;
 
 import android.content.ContentValues;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,8 +11,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -29,12 +36,13 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.VideoView;
 
-public class LiveActivity extends AppCompatActivity {
+public class LiveActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
+    private static final String TAG = LiveActivity.class.getSimpleName();
     private VideoView videoView;
 
     private LivePublicFragment livePublic;
-   //  private LivePrivateFragment livePrivate;
+     private LivePrivateFragment livePrivate;
     private LiveViewerFragment liveViewer;
     private LiveBoxFragment liveBox;
     private FragmentManager manager;
@@ -48,13 +56,20 @@ public class LiveActivity extends AppCompatActivity {
     private String table="anchor";
     private TextView mTextViewAttention;
 
+    //是否横屏
+    private boolean isLandscape;
+    private CheckBox mFullScreen;
+    private int oldHeight;
+    private RelativeLayout mFooter;
+    private CheckBox mDanmu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_live);
        // path = getIntent().getStringExtra("path");
-        path="http://pull.kktv8.com/livekktv/111308425.flv";
+        path="http://pull.kktv8.com/livekktv/105834071.flv";
        // userid=getIntent().getStringExtra("id");
         dao=new UserDAO(this);
 //        String sql="select * from anchor where type=? and userid=?";
@@ -76,10 +91,10 @@ public class LiveActivity extends AppCompatActivity {
         manager=getSupportFragmentManager();
         fragmentTransaction=manager.beginTransaction();
         fragmentTransaction.add(R.id.fl_computer_live,livePublic);
-       // fragmentTransaction.add(R.id.fl_computer_live,livePrivate);
+        fragmentTransaction.add(R.id.fl_computer_live,livePrivate);
         fragmentTransaction.add(R.id.fl_computer_live,liveViewer);
         fragmentTransaction.add(R.id.fl_computer_live,liveBox);
-       // fragmentTransaction.hide(livePrivate);
+        fragmentTransaction.hide(livePrivate);
         fragmentTransaction.hide(liveViewer);
         fragmentTransaction.hide(liveBox);
         fragmentTransaction.commit();
@@ -94,13 +109,18 @@ public class LiveActivity extends AppCompatActivity {
     private void initData() {
 
         livePublic=new LivePublicFragment();
-        //livePrivate=new LivePrivateFragment();
+        livePrivate=new LivePrivateFragment();
         liveViewer=new LiveViewerFragment();
         liveBox=new LiveBoxFragment();
     }
 
     private void initView() {
         videoView= (VideoView) findViewById(R.id.vv_vitamio_test);
+        mFullScreen = (CheckBox) findViewById(R.id.iv_computerlive_ortientation);
+        mFullScreen.setOnCheckedChangeListener(this);
+        mDanmu = (CheckBox) findViewById(R.id.iv_computerlive_danmu);
+        mDanmu.setOnCheckedChangeListener(this);
+        mFooter = (RelativeLayout) findViewById(R.id.activity_computer_live_footer);
         linearLayout= (LinearLayout) findViewById(R.id.ll_computer_live);
         ((TextView)linearLayout.getChildAt(0)).setTextColor(Color.RED);
         mBarrageLayout = (BarrageRelativeLayout) findViewById(R.id.barrageView_computer_showtitle);
@@ -113,6 +133,7 @@ public class LiveActivity extends AppCompatActivity {
         }
         fragmentTransaction=manager.beginTransaction();
         fragmentTransaction.hide(livePublic);
+        fragmentTransaction.hide(livePrivate);
         fragmentTransaction.hide(liveViewer);
         fragmentTransaction.hide(liveBox);
         fragmentTransaction.commit();
@@ -126,17 +147,8 @@ public class LiveActivity extends AppCompatActivity {
                     fragmentTransaction.commit();
                     break;
                 case R.id.tv_computer_live_private:
-                    if (isChecked) {
-                        ((TextView) view).setText("关闭弹幕");
-                        showDanMU();
-                        isChecked = false;
-                    }else {
-                        if (mBarrageLayout != null){
-                            mBarrageLayout.setVisibility(View.GONE);
-                            ((TextView) view).setText("打开弹幕");
-                            isChecked = true;
-                        }
-                    }
+                    fragmentTransaction.show(livePrivate);
+                    fragmentTransaction.commit();
                     break;
 
                 case R.id.tv_computer_live_viewer:
@@ -174,10 +186,72 @@ public class LiveActivity extends AppCompatActivity {
 
                     finish();
                     break;
+
             }
         }
     }
 
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.iv_computerlive_ortientation:
+                if (isChecked) {
+                    mFooter.setVisibility(View.GONE);
+                    oldHeight = videoView.getHeight();
+                    //切换全屏 添加全屏标记
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    //代码旋转屏幕 横屏
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    ViewGroup.LayoutParams layoutParams = videoView.getLayoutParams();
+                    layoutParams.height=WindowManager.LayoutParams.MATCH_PARENT;
+                    layoutParams.width=WindowManager.LayoutParams.MATCH_PARENT;
+                    videoView.setLayoutParams(layoutParams);
+
+                }else{
+                    mFooter.setVisibility(View.VISIBLE);
+                    //清除全屏标记
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    //旋转为竖屏
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    //设置高度
+                    ViewGroup.LayoutParams layoutParams = videoView.getLayoutParams();
+                    layoutParams.height=oldHeight;
+                    videoView.setLayoutParams(layoutParams);
+                }
+
+
+                break;
+            case R.id.iv_computerlive_danmu:
+                if (isChecked) {
+
+                    showDanMU();
+
+                }else {
+                    if (mBarrageLayout != null){
+                        mBarrageLayout.setVisibility(View.GONE);
+
+
+                    }
+                }
+                break;
+        }
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //竖屏
+            Log.e(TAG, "onConfigurationChanged: 竖屏");
+            isLandscape = false;
+        } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            //横屏
+            Log.e(TAG, "onConfigurationChanged: 横屏");
+            isLandscape = true;
+        }
+        super.onConfigurationChanged(newConfig);
+    }
 
     public void showDanMU(){
         mBarrageLayout.setVisibility(View.VISIBLE);
@@ -220,4 +294,6 @@ public class LiveActivity extends AppCompatActivity {
         // 启动分享GUI
         oks.show(this);
     }
+
+
 }

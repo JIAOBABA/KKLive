@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_computer_live"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="2"
+
     tools:context="com.kk.kklive.ui.live.LiveActivity">
     <RelativeLayout
-        android:layout_weight="1"
+
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
         <io.vov.vitamio.widget.VideoView
             android:id="@+id/vv_vitamio_test"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="300dp"/>
         <com.kk.kklive.views.BarrageRelativeLayout
             android:id="@+id/barrageView_computer_showtitle"
             android:layout_alignParentTop="true"
@@ -41,13 +40,36 @@
             android:src="@mipmap/kk_room_share_btn_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <CheckBox
+        android:id="@+id/iv_computerlive_ortientation"
 
+
+        android:layout_below="@id/iv_computerlive_share"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:button="@null"
+        android:background="@drawable/liveorientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/iv_computerlive_danmu"
+
+            android:checked="true"
+            android:layout_below="@id/iv_computerlive_ortientation"
+            android:layout_marginTop="80dp"
+            android:layout_alignParentRight="true"
+            android:button="@null"
+            android:background="@drawable/livedanmu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_weight="1"
+        android:layout_marginTop="300dp"
+        android:id="@+id/activity_computer_live_footer"
+
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/ll_computer_live"
@@ -139,4 +161,4 @@
                 android:layout_height="50dp" />
         </LinearLayout>
     </RelativeLayout>
-</LinearLayout>
+</FrameLayout>

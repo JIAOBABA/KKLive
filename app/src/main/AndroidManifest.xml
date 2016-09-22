@@ -30,6 +30,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
+    <!--播放-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <application
         android:name=".KKApp"
         android:allowBackup="true"
@@ -81,6 +83,10 @@
         <activity android:name=".ui.mine.HomeActivity">
         </activity>
         <activity android:name=".ui.news.NewsSecondActivity">
+        </activity>
+        <activity android:name=".ui.live.LiveActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
         </activity>
     </application>
 
