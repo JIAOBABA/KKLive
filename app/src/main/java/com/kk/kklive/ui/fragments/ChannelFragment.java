@@ -40,6 +40,7 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
     private RecyclerView mRecyclerView;
     private ChannelHeaderAdapter mHeaderAdapter;
     private Handler mHandler;
+    private List<Channel.PlateListBean> mPlateList;
 
     @Nullable
     @Override
@@ -58,13 +59,15 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
     private void setupView() {
         RequestParams params = new RequestParams(CHANNEL_URL);
         x.http().get(params, new Callback.CommonCallback<String>() {
+
+
             @Override
             public void onSuccess(String result) {
                 Gson gson = new Gson();
                 Channel channel = gson.fromJson(result, Channel.class);
-                List<Channel.PlateListBean> plateList = channel.getPlateList();
-                mHeaderAdapter.updateRes(plateList);
-                mAdapter.updateRes(plateList);
+                mPlateList = channel.getPlateList();
+                mHeaderAdapter.updateRes(mPlateList);
+                mAdapter.updateRes(mPlateList);
             }
 
             @Override
@@ -118,6 +121,7 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case UPDATE:
+                mAdapter.updateRes(mPlateList);
                 mRefreshLayout.setRefreshing(false);
                 break;
         }

@@ -27,6 +27,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdapter{
 
     private List<Channel.PlateListBean> data;
+    private List<Channel.PlateListBean.ResultBean> result;
     private LayoutInflater inflater;
     private ImageOptions mOptions;
 
@@ -55,7 +56,8 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
 
     @Override
     public int getCount() {
-        return data!=null ? data.size() :0;
+        int count = (result.size() + 1) / 2;
+        return result!=null? count : 0;
     }
 
     @Override
@@ -87,14 +89,6 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         TextView nickName2 = (TextView) holder.getViewRes(R.id.item_channel_sticky_nickname2);
         TextView onLineCount2 = (TextView) holder.getViewRes(R.id.item_channel_sticky_online_count2);
         TextView roomTheme2 = (TextView) holder.getViewRes(R.id.item_channel_sticky_roomTheme2);
-        ImageView image3 = (ImageView) holder.getViewRes(R.id.item_channel_sticky_image3);
-        TextView nickName3 = (TextView) holder.getViewRes(R.id.item_channel_sticky_nickname3);
-        TextView onLineCount3 = (TextView) holder.getViewRes(R.id.item_channel_sticky_online_count3);
-        TextView roomTheme3 = (TextView) holder.getViewRes(R.id.item_channel_sticky_roomTheme3);
-        ImageView image4 = (ImageView) holder.getViewRes(R.id.item_channel_sticky_image4);
-        TextView nickName4 = (TextView) holder.getViewRes(R.id.item_channel_sticky_nickname4);
-        TextView onLineCount4 = (TextView) holder.getViewRes(R.id.item_channel_sticky_online_count4);
-        TextView roomTheme4 = (TextView) holder.getViewRes(R.id.item_channel_sticky_roomTheme4);
 
         nickName.setText(getItem(position).getResult().get(0).getNickname());
         onLineCount.setText(String.valueOf(getItem(position).getResult().get(0).getOnlineCount()));
@@ -105,16 +99,6 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         onLineCount2.setText(String.valueOf(getItem(position).getResult().get(1).getOnlineCount()));
         roomTheme2.setText(getItem(position).getResult().get(1).getRoomTheme());
         x.image().bind(image2,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(1).getPortrait_path_256(),mOptions);
-
-        nickName3.setText(getItem(position).getResult().get(2).getNickname());
-        onLineCount3.setText(String.valueOf(getItem(position).getResult().get(2).getOnlineCount()));
-        roomTheme3.setText(getItem(position).getResult().get(2).getRoomTheme());
-        x.image().bind(image3,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(2).getPortrait_path_256(),mOptions);
-
-        nickName4.setText(getItem(position).getResult().get(3).getNickname());
-        onLineCount4.setText(String.valueOf(getItem(position).getResult().get(3).getOnlineCount()));
-        roomTheme4.setText(getItem(position).getResult().get(3).getRoomTheme());
-        x.image().bind(image4,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(3).getPortrait_path_256(),mOptions);
 
         return convertView;
     }

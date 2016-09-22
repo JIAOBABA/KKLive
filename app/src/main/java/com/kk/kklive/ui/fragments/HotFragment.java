@@ -66,43 +66,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-//        headerView();
         setupView();
-    }
-
-    private void headerView() {
-        RequestParams params = new RequestParams(ADVERTISEMENT_URL);
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                Gson gson = new Gson();
-                DirectSeedingAdvertisement directSeedingAdvertisement = gson.fromJson(result, DirectSeedingAdvertisement.class);
-                List<DirectSeedingAdvertisement.ActivityListBean> activityList = directSeedingAdvertisement.getActivityList();
-                for (int i = 0; i < activityList.size(); i++) {
-                    url = new ArrayList<>();
-                    String topMobileURL = activityList.get(i).getTopMobileURL();
-                    url.add(topMobileURL);
-                }
-                Log.e(TAG, "onSuccess: "+url.size() );
-//                mHeaderAdapter.updateRes(url);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-        
     }
 
     private void setupView() {
@@ -188,18 +152,6 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
         mAdapter.setListener(this);
     }
 
-    private List<Fragment> getData() {
-        List<Fragment> data = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            HotHeaderFragment fragment = new HotHeaderFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("text","http://ures.kktv8.com/kktv/activity/image/3873/20160902093526_159.jpg");
-            fragment.setArguments(bundle);
-            data.add(fragment);
-        }
-        return data;
-    }
-
     /**
      * 下拉刷新
      * @param refreshView
@@ -222,11 +174,9 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case UPDATE_RES:
-//                mAdapter.updateRes(getData());
                 mRefresh.onRefreshComplete();
                 break;
             case ADD_RES:
-//                mAdapter.addRes(getData());
                 mRefresh.onRefreshComplete();
                 break;
             case CAROUSEL:
