@@ -37,7 +37,6 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
     private SwipeRefreshLayout mRefreshLayout;
     private StickyListHeadersListView mStickyListHeadersListView;
     private ChannelAdapter mAdapter;
-    private View mHeaderView;
     private RecyclerView mRecyclerView;
     private ChannelHeaderAdapter mHeaderAdapter;
     private Handler mHandler;
@@ -94,7 +93,7 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
         // 初始化StickyListHeadersListView
         mStickyListHeadersListView = ((StickyListHeadersListView) layout.findViewById(R.id.channel_sticky_list));
         // 初始化头布局
-        mHeaderView = getActivity().getLayoutInflater().inflate(R.layout.fragment_channel_header,null);
+        View mHeaderView = getActivity().getLayoutInflater().inflate(R.layout.fragment_channel_header,null);
         mRecyclerView = ((RecyclerView) mHeaderView.findViewById(R.id.item_channel_header_recycler));
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 5);
         mRecyclerView.setLayoutManager(layoutManager);

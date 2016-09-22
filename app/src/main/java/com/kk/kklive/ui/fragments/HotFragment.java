@@ -4,16 +4,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.kk.kklive.R;
 import com.kk.kklive.adapters.HotAdapter;
+import com.kk.kklive.adapters.HotHeaderAdapter;
+import com.kk.kklive.adapters.HotHeaderFragmentAdapter;
+import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Hot;
 import com.kk.kklive.views.PullToRefreshStickyListHeadersListView;
+import com.rock.teachlibrary.http.HttpUtil;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -33,12 +41,18 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     private static final int UPDATE_RES = 100;
     private static final long DELAY_TIME = 3 * 1000;
     private static final int ADD_RES = 200;
-    private static final String POPULARANCHOR_URL = "http://www.kktv1.com/CDN/output/M/1/I/55000003/P/a-1_c-70036_start-0_offset-20_platform-2_type-2/json.js";
+    private static final String POPULAR_ANCHOR_URL = "http://www.kktv1.com/CDN/output/M/1/I/55000003/P/a-1_c-70036_start-0_offset-20_platform-2_type-2/json.js";
+    private static final String ADVERTISEMENT_URL = "http://www.kktv1.com/CDN/output/M/1440/I/10002006/P/a-1_c-70036_platform-2_isTop-1_version-79/json.js";
+    private static final String TAG = HotFragment.class.getSimpleName();
+    private static final int CAROUSEL = 300;
     private PullToRefreshStickyListHeadersListView mRefresh;
     private StickyListHeadersListView mStickyListHeadersListView;
 
     private Handler mHandler;
     private HotAdapter mAdapter;
+    private List<String> url;
+    private ViewPager mViewPager;
+    private HotHeaderFragmentAdapter mHotHeaderFragmentAdapter;
 
     @Nullable
     @Override
@@ -51,11 +65,78 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+//        headerView();
         setupView();
     }
 
+    private void headerView() {
+        RequestParams params = new RequestParams(ADVERTISEMENT_URL);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                DirectSeedingAdvertisement directSeedingAdvertisement = gson.fromJson(result, DirectSeedingAdvertisement.class);
+                List<DirectSeedingAdvertisement.ActivityListBean> activityList = directSeedingAdvertisement.getActivityList();
+                for (int i = 0; i < activityList.size(); i++) {
+                    url = new ArrayList<>();
+                    String topMobileURL = activityList.get(i).getTopMobileURL();
+                    url.add(topMobileURL);
+                }
+                Log.e(TAG, "onSuccess: "+url.size() );
+//                mHeaderAdapter.updateRes(url);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+        
+    }
+
     private void setupView() {
-        RequestParams params = new RequestParams(POPULARANCHOR_URL);
+
+        HttpUtil.getStringAsync(ADVERTISEMENT_URL, new HttpUtil.RequestCallBack() {
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+
+                Gson gson = new Gson();
+                DirectSeedingAdvertisement directSeedingAdvertisement = gson.fromJson(result, DirectSeedingAdvertisement.class);
+                List<DirectSeedingAdvertisement.ActivityListBean> activityList = directSeedingAdvertisement.getActivityList();
+                List<Fragment> data = new ArrayList<>();
+                for (int i = 0; i < activityList.size(); i++) {
+                    HotHeaderFragment fragment = new HotHeaderFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("text",activityList.get(i).getTopMobileURL());
+                    fragment.setArguments(bundle);
+                    data.add(fragment);
+                }
+                mHotHeaderFragmentAdapter.upDateRes(data,activityList);
+                mViewPager.setCurrentItem(100);
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+
+        RequestParams params = new RequestParams(POPULAR_ANCHOR_URL);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -91,16 +172,28 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
 
         // 获取StickyListHeadersListView
         mStickyListHeadersListView = mRefresh.getRefreshableView();
+        // 初始化头布局
+        View mHeaderView = getActivity().getLayoutInflater().inflate(R.layout.item_hot_header, null);
+        mViewPager = ((ViewPager) mHeaderView.findViewById(R.id.item_hot_header_viewpager));
+        mHotHeaderFragmentAdapter = new HotHeaderFragmentAdapter(getChildFragmentManager(),null);
+        mViewPager.setAdapter(mHotHeaderFragmentAdapter);
+        mHandler.sendEmptyMessageDelayed(CAROUSEL,DELAY_TIME);
+
+        // 添加头布局
+        mStickyListHeadersListView.addHeaderView(mHeaderView);
+
         mAdapter = new HotAdapter(getActivity(),null);
         mStickyListHeadersListView.setAdapter(mAdapter);
     }
 
-    private List<Hot.RoomListBean> getData() {
-        List<Hot.RoomListBean> data = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            Hot.RoomListBean bean = new Hot.RoomListBean();
-            bean.setNickname("沧海一声笑"+i);
-            data.add(bean);
+    private List<Fragment> getData() {
+        List<Fragment> data = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            HotHeaderFragment fragment = new HotHeaderFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("text","http://ures.kktv8.com/kktv/activity/image/3873/20160902093526_159.jpg");
+            fragment.setArguments(bundle);
+            data.add(fragment);
         }
         return data;
     }
@@ -127,12 +220,17 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case UPDATE_RES:
-                mAdapter.updateRes(getData());
+//                mAdapter.updateRes(getData());
                 mRefresh.onRefreshComplete();
                 break;
             case ADD_RES:
-                mAdapter.addRes(getData());
+//                mAdapter.addRes(getData());
                 mRefresh.onRefreshComplete();
+                break;
+            case CAROUSEL:
+                int currentItem = mViewPager.getCurrentItem();
+                mViewPager.setCurrentItem(currentItem+1);
+                mHandler.sendEmptyMessageDelayed(CAROUSEL,DELAY_TIME);
                 break;
         }
         return false;
