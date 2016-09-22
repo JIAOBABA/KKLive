@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerInside"/>
+                    android:scaleType="fitXY"/>
 
                 <TextView
                     android:id="@+id/item_channel_sticky_roomTheme"
@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerInside"/>
+                    android:scaleType="fitXY"/>
 
                 <TextView
                     android:id="@+id/item_channel_sticky_roomTheme2"
