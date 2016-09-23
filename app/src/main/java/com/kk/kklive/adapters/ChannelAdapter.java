@@ -157,7 +157,6 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
 
     @Override
     public long getHeaderId(int position) {
-        Log.e(TAG, "getHeaderId: "+position );
         return position;
     }
 

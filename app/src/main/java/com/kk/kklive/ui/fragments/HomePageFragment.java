@@ -11,7 +11,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.kk.kklive.R;
 import com.kk.kklive.adapters.HomePageAdapter;
+import com.kk.kklive.adapters.HomePageCityAnchorFooterAdapter;
 import com.kk.kklive.adapters.HomePageRecommendHeaderAdapter;
+import com.kk.kklive.model.CityAnchor;
 import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Recommend;
 import com.kk.kklive.model.StarWars;
@@ -34,7 +36,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * 首页碎片
  * Created by fei on 2016/9/20.
  */
-public class HomePageFragment extends BaseFragment implements OnBannerClickListener, HomePageRecommendHeaderAdapter.OnItemClickListener {
+public class HomePageFragment extends BaseFragment implements OnBannerClickListener, HomePageRecommendHeaderAdapter.OnItemClickListener, HomePageCityAnchorFooterAdapter.OnItemClickListener {
 
     private static final String HOMEPAGERECOMMEND_URL = "http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":1,\"c\":70036,\"FuncTag\":55000002,\"start\":0,\"offset\":14,\"platform\":2}";
     private static final String STARWARS_URL = "http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":1,\"c\":70036,\"FuncTag\":10002011,\"platform\":2,\"userId\":112731886}";
@@ -44,6 +46,9 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
     private HomePageAdapter mAdapter;
     private Banner mBanner;
     private List<Recommend.RoomListBean> mRoomList;
+    private StickyListView mFooterListView;
+    private HomePageCityAnchorFooterAdapter mFooterAdapter;
+    private List<CityAnchor.ActorNearbyBean> mActorNearby;
 
     @Nullable
     @Override
@@ -146,6 +151,34 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
 
             }
         });
+
+        // 同城主播解析
+        RequestParams params3 = new RequestParams("http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":2,\"c\":70036,\"FuncTag\":20010401,\"start\":0,\"offset\":4,\"gender\":-1,\"cityName\":\"%E6%B5%B7%E6%B7%80nbsp%E5%8C%97%E4%BA%ACnbsp%E5%8C%97%E4%BA%AC\",\"platform\":2}");
+        x.http().get(params3, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                CityAnchor cityAnchor = gson.fromJson(result, CityAnchor.class);
+                mActorNearby = cityAnchor.getActorNearby();
+                mFooterAdapter.updateRes(mActorNearby);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 
     private void initView() {
@@ -165,7 +198,15 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
         mBanner.setOnBannerClickListener(this);
         // 添加头布局
         mStickyListHeadersListView.addHeaderView(headerView);
+        // 初始化脚布局
+        View footerView = getActivity().getLayoutInflater().inflate(R.layout.fragment_home_page_footer, null);
+        mFooterListView = ((StickyListView) footerView.findViewById(R.id.home_page_footer_sticky_list));
+        mFooterAdapter = new HomePageCityAnchorFooterAdapter(getActivity(),null);
+        mFooterListView.setAdapter(mFooterAdapter);
+        mFooterAdapter.setListener(this);
 
+        // 添加脚布局
+        mStickyListHeadersListView.addFooterView(footerView);
         mAdapter = new HomePageAdapter(getActivity(),null);
         mStickyListHeadersListView.setAdapter(mAdapter);
     }
@@ -180,6 +221,15 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
     @Override
     public void onItemClick(int position) {
         String liveStream = mRoomList.get(position).getLiveStream();
+        Intent intent = new Intent(getActivity(), LiveActivity.class);
+        intent.putExtra("path",liveStream);
+        startActivity(intent);
+    }
+
+    // 同城主播列表监听
+    @Override
+    public void onFooterItemClick(int position) {
+        String liveStream = mActorNearby.get(position).getLiveStream();
         Intent intent = new Intent(getActivity(), LiveActivity.class);
         intent.putExtra("path",liveStream);
         startActivity(intent);
