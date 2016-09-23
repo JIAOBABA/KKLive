@@ -1,5 +1,6 @@
 package com.kk.kklive.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,7 @@ import com.kk.kklive.R;
 import com.kk.kklive.adapters.ChannelAdapter;
 import com.kk.kklive.adapters.ChannelHeaderAdapter;
 import com.kk.kklive.model.Channel;
+import com.kk.kklive.ui.live.LiveActivity;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -117,8 +119,9 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
         mStickyListHeadersListView.addHeaderView(mHeaderView);
         // 绑定脚布局
         mStickyListHeadersListView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.item_channel_footer,null));
+
         mAdapter = new ChannelAdapter(getActivity(),null);
-         // 绑定适配器
+        // 绑定适配器
         mStickyListHeadersListView.setAdapter(mAdapter);
         // 设置监听
         mAdapter.setListener(this);
@@ -143,6 +146,9 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(), "航航傻逼"+position, Toast.LENGTH_SHORT).show();
+        String liveStream = mPlateList.get(position / 4).getResult().get(position % 4).getLiveStream();
+        Intent intent = new Intent(getActivity(), LiveActivity.class);
+        intent.putExtra("path",liveStream);
+        startActivity(intent);
     }
 }
