@@ -5,21 +5,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.kk.kklive.R;
 import com.kk.kklive.adapters.HotAdapter;
-import com.kk.kklive.adapters.HotHeaderAdapter;
-import com.kk.kklive.adapters.HotHeaderFragmentAdapter;
+import com.kk.kklive.constants.HttpConstant;
 import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Hot;
 import com.kk.kklive.ui.live.LiveActivity;
@@ -27,7 +27,6 @@ import com.kk.kklive.views.PullToRefreshStickyListHeadersListView;
 import com.qf.bannder.Banner;
 import com.qf.bannder.BannerConfig;
 import com.qf.bannder.listener.OnBannerClickListener;
-import com.rock.teachlibrary.http.HttpUtil;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -42,28 +41,22 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * 热门碎片
  * Created by fei on 2016/9/20.
  */
-public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2,Handler.Callback, HotAdapter.OnItemClickListener, OnBannerClickListener {
+public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2,Handler.Callback, HotAdapter.OnItemClickListener, OnBannerClickListener, RadioGroup.OnCheckedChangeListener {
 
     private static final int UPDATE_RES = 100;
     private static final long DELAY_TIME = 3 * 1000;
     private static final int ADD_RES = 200;
-    private static final String POPULAR_ANCHOR_URL = "http://www.kktv1.com/CDN/output/M/1/I/55000003/P/a-1_c-70036_start-0_offset-20_platform-2_type-2/json.js";
-    private static final String ADVERTISEMENT_URL = "http://www.kktv1.com/CDN/output/M/1440/I/10002006/P/a-1_c-70036_platform-2_isTop-1_version-79/json.js";
     private static final String TAG = HotFragment.class.getSimpleName();
-    private static final int CAROUSEL = 300;
     private PullToRefreshStickyListHeadersListView mRefresh;
     private StickyListHeadersListView mStickyListHeadersListView;
-
     private Handler mHandler;
     private HotAdapter mAdapter;
-    private List<String> url;
-    private ViewPager mViewPager;
-    private HotHeaderFragmentAdapter mHotHeaderFragmentAdapter;
 
-
-    DirectSeedingAdvertisement directSeedingAdvertisement;
-    Hot hot;
+    private DirectSeedingAdvertisement directSeedingAdvertisement;
+    private Hot hot;
     private Banner mBanner;
+    private PopupWindow mPopupWindow;
+    private TextView mText;
 
     @Nullable
     @Override
@@ -82,7 +75,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     private void setupView() {
 
         // 广告网址
-        RequestParams params1 = new RequestParams(ADVERTISEMENT_URL);
+        RequestParams params1 = new RequestParams(HttpConstant.ADVERTISEMENT_URL);
         x.http().get(params1, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -113,31 +106,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
             }
         });
         // 正在直播网址
-        RequestParams params = new RequestParams(POPULAR_ANCHOR_URL);
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                Gson gson = new Gson();
-                hot = gson.fromJson(result, Hot.class);
-                List<Hot.RoomListBean> roomList = hot.getRoomList();
-                mAdapter.updateRes(roomList);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
+        goHttp(HttpConstant.POPULAR_ANCHOR_URL);
     }
 
     private void initView() {
@@ -197,7 +166,47 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     }
 
     @Override
+    public void onHeaderItemClick(View view) {
+        View pop = LayoutInflater.from(getActivity()).inflate(R.layout.hot_pop, null);
+        mText = ((TextView) view);
+
+        RadioGroup radioGroup = (RadioGroup) pop.findViewById(R.id.hot_pop_radio_group);
+        radioGroup.setOnCheckedChangeListener(this);
+        int x = (int) view.getX();
+        int y = (int) view.getY();
+        Log.e(TAG, "onHeaderItemClick: "+x+"y"+y );
+
+        if (mPopupWindow == null) {
+            this.mPopupWindow = new PopupWindow(pop);
+            mPopupWindow.setWidth(getResources().getDisplayMetrics().widthPixels/4);
+            mPopupWindow.setHeight(getResources().getDisplayMetrics().heightPixels/5);
+//            mPopupWindow.showAsDropDown(view, 0,0);
+
+        }
+        if (mPopupWindow.isShowing()) {
+            // 如果显示状态 就隐藏
+            mPopupWindow.dismiss();
+        }else {
+//             以一个View为基准点，在他的下方去显示
+           mPopupWindow.showAsDropDown(view, 0,0);
+            // 显示在指定位置
+           // mPopupWindow.showAtLocation(view, Gravity.TOP/Gravity.LEFT,0,0);
+            pop.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (mPopupWindow!=null&&mPopupWindow.isShowing()) {
+                        mPopupWindow.dismiss();
+                        mPopupWindow = null;
+                    }
+                    return false;
+                }
+            });
+        }
+    }
+
+    @Override
     public void onItemClick(int position) {
+        Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
         String liveStream = hot.getRoomList().get(position).getLiveStream();
         Intent intent = new Intent(getActivity(), LiveActivity.class);
         intent.putExtra("path",liveStream);
@@ -209,5 +218,50 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     @Override
     public void OnBannerClick(int position) {
         Toast.makeText(getActivity(), "图片被点击"+position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.hot_pop_popular_anchor:
+                goHttp(HttpConstant.POPULAR_ANCHOR_URL);
+                mText.setText("人气主播");
+                break;
+            case R.id.hot_pop_star_rating:
+                goHttp(HttpConstant.STAR_RATING_URL);
+                mText.setText("明星等级");
+                break;
+            case R.id.hot_pop_recently_launched:
+                goHttp(HttpConstant.RECENTLY_LAUNCHED_URL);
+                mText.setText("最近开播");
+                break;
+        }
+    }
+
+    private void goHttp(String s) {
+        RequestParams params = new RequestParams(s);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                hot = gson.fromJson(result, Hot.class);
+                mAdapter.updateRes(hot.getRoomList());
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 }

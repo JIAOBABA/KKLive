@@ -102,7 +102,7 @@ public class PullToRefreshStickyListHeadersListView extends PullToRefreshBase<St
         int positionForView = stickyListHeadersListView.getPositionForView(child);
 
 
-        return height == bottom + bottomMargin + paddingBottom+100 && count == positionForView + 1;
+        return height == bottom + bottomMargin + paddingBottom && count == positionForView + 1;
 
     }
 

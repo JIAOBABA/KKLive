@@ -6,8 +6,8 @@
 
     <com.kk.kklive.views.PullToRefreshStickyListHeadersListView
         android:id="@+id/pull_sticky_list"
+        android:dividerHeight="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </FrameLayout>
