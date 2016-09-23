@@ -42,6 +42,7 @@ public class DirectSeedingFragment extends BaseFragment {
     private void initView() {
         mTabLayout = ((TabLayout) layout.findViewById(R.id.direct_seeding_tab_layout));
         mViewPager = ((ViewPager) layout.findViewById(R.id.direct_seeding_viewpager));
+        mViewPager.setOffscreenPageLimit(2);
         List<Fragment> data = new ArrayList<>();
         data.add(new HomePageFragment());
         data.add(new HotFragment());

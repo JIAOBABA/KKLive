@@ -63,7 +63,6 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
 
     @Override
     public int getCount() {
-        Log.e(TAG, "getCount: " +data.size());
         return data!=null ? data.size() : 0;
     }
 
@@ -126,7 +125,6 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         roomTheme4.setText(getItem(position).getResult().get(3).getRoomTheme());
         x.image().bind(image4,"http://ures.kktv8.com/kktv"+getItem(position).getResult().get(3).getPortrait_path_256(),mOptions);
 
-
         image.setOnClickListener(this);
         image2.setOnClickListener(this);
         image3.setOnClickListener(this);
@@ -162,8 +160,8 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
 
     @Override
     public void onClick(View v) {
-        Integer tag = (Integer) v.getTag();
-        mListener.onItemClick(tag);
+        Integer position = (Integer) v.getTag();
+        mListener.onItemClick(position);
     }
 
     /**

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
     private static final String CHANNEL_URL = "http://www.kktv1.com/CDN/output/M/1/I/55000004/P/a-1_c-70036_platform-2/json.js";
     private static final int UPDATE = 100;
     private static final long DELAYED_TIME = 3 * 1000;
+    private static final String TAG = ChannelFragment.class.getSimpleName();
     private SwipeRefreshLayout mRefreshLayout;
     private StickyListHeadersListView mStickyListHeadersListView;
     private ChannelAdapter mAdapter;
@@ -68,10 +70,12 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
                 Channel channel = gson.fromJson(result, Channel.class);
                 mPlateList = channel.getPlateList();
                 mHeaderAdapter.updateRes(mPlateList);
+
                 for (int i = 0; i < mPlateList.size(); i++) {
                     List<Channel.PlateListBean.ResultBean> result1 = mPlateList.get(i).getResult();
                     if (result1.size()<4) {
                         mPlateList.remove(i);
+                        i--;
                     }
                 }
                 mAdapter.updateRes(mPlateList);

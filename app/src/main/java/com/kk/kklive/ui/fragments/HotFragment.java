@@ -24,6 +24,9 @@ import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Hot;
 import com.kk.kklive.ui.live.LiveActivity;
 import com.kk.kklive.views.PullToRefreshStickyListHeadersListView;
+import com.qf.bannder.Banner;
+import com.qf.bannder.BannerConfig;
+import com.qf.bannder.listener.OnBannerClickListener;
 import com.rock.teachlibrary.http.HttpUtil;
 
 import org.xutils.common.Callback;
@@ -39,7 +42,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * 热门碎片
  * Created by fei on 2016/9/20.
  */
-public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2,Handler.Callback, HotAdapter.OnItemClickListener {
+public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2,Handler.Callback, HotAdapter.OnItemClickListener, OnBannerClickListener {
 
     private static final int UPDATE_RES = 100;
     private static final long DELAY_TIME = 3 * 1000;
@@ -60,6 +63,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
 
     DirectSeedingAdvertisement directSeedingAdvertisement;
     Hot hot;
+    private Banner mBanner;
 
     @Nullable
     @Override
@@ -77,36 +81,38 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
 
     private void setupView() {
 
-        HttpUtil.getStringAsync(ADVERTISEMENT_URL, new HttpUtil.RequestCallBack() {
-            @Override
-            public void onFailure() {
-
-            }
-
+        // 广告网址
+        RequestParams params1 = new RequestParams(ADVERTISEMENT_URL);
+        x.http().get(params1, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-
                 Gson gson = new Gson();
                 directSeedingAdvertisement = gson.fromJson(result, DirectSeedingAdvertisement.class);
                 List<DirectSeedingAdvertisement.ActivityListBean> activityList = directSeedingAdvertisement.getActivityList();
-                List<Fragment> data = new ArrayList<>();
-                for (int i = 0; i < activityList.size(); i++) {
-                    HotHeaderFragment fragment = new HotHeaderFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("text",activityList.get(i).getTopMobileURL());
-                    fragment.setArguments(bundle);
-                    data.add(fragment);
+                List<String> data = new ArrayList<>();
+                for (int i = 0; i <activityList.size() ; i++) {
+                    String topMobileURL = activityList.get(i).getTopMobileURL();
+                    data.add(topMobileURL);
                 }
-                mHotHeaderFragmentAdapter.upDateRes(data,activityList);
-                mViewPager.setCurrentItem(100);
+                mBanner.setImages(data);
             }
 
             @Override
-            public void onFinish() {
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
 
             }
         });
-
+        // 正在直播网址
         RequestParams params = new RequestParams(POPULAR_ANCHOR_URL);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
@@ -145,10 +151,11 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
         mStickyListHeadersListView = mRefresh.getRefreshableView();
         // 初始化头布局
         View mHeaderView = getActivity().getLayoutInflater().inflate(R.layout.item_hot_header, null);
-        mViewPager = ((ViewPager) mHeaderView.findViewById(R.id.item_hot_header_viewpager));
-        mHotHeaderFragmentAdapter = new HotHeaderFragmentAdapter(getChildFragmentManager(),null);
-        mViewPager.setAdapter(mHotHeaderFragmentAdapter);
-        mHandler.sendEmptyMessageDelayed(CAROUSEL,DELAY_TIME);
+        mBanner = ((Banner) mHeaderView.findViewById(R.id.item_hot_header_banner));
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        mBanner.setIndicatorGravity(BannerConfig.RIGHT);
+        mBanner.setDelayTime(5 * 1000);
+        mBanner.setOnBannerClickListener(this);
 
         // 添加头布局
         mStickyListHeadersListView.addHeaderView(mHeaderView);
@@ -185,22 +192,22 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
             case ADD_RES:
                 mRefresh.onRefreshComplete();
                 break;
-            case CAROUSEL:
-                int currentItem = mViewPager.getCurrentItem();
-                mViewPager.setCurrentItem(currentItem+1);
-                mHandler.sendEmptyMessageDelayed(CAROUSEL,DELAY_TIME);
-                break;
         }
         return false;
     }
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(), "傻叼王飞"+position+"号", Toast.LENGTH_SHORT).show();
         String liveStream = hot.getRoomList().get(position).getLiveStream();
         Intent intent = new Intent(getActivity(), LiveActivity.class);
         intent.putExtra("path",liveStream);
         startActivity(intent);
 
+    }
+
+    // 头布局监听事件
+    @Override
+    public void OnBannerClick(int position) {
+        Toast.makeText(getActivity(), "图片被点击"+position, Toast.LENGTH_SHORT).show();
     }
 }
