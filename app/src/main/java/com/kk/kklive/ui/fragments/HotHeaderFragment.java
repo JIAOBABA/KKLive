@@ -33,9 +33,6 @@ public class HotHeaderFragment extends BaseFragment {
         ImageView imageView = (ImageView) layout.findViewById(R.id.fragment_hot_header_image);
         Bundle arguments = getArguments();
         String image = arguments.getString("text", "失败");
-        Log.e(TAG, "onCreateView: "+image );
-//        ImageLoader.display(imageView,image,R.mipmap.loading_1);
-//        Picasso.with(getActivity()).load(image).placeholder(R.mipmap.loading_1).error(R.mipmap.app_icon).into(imageView);
         x.image().bind(imageView,image,mOptions);
         return layout;
     }

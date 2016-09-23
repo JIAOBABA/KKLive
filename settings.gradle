@@ -1,2 +1,1 @@
-include ':app', ':PullToRefresh', ':teachlibrary', ':vitamio'
-include ':stickylibrary'
+include ':app', ':PullToRefresh', ':teachlibrary', ':vitamio', ':bannder'

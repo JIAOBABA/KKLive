@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+             android:background="#fff"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:src="@mipmap/kk_section_icon_star"/>
+
+    <TextView
+        android:id="@+id/item_home_page_recommend_sticky_header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:textSize="16sp"
+        android:text="周星争夺战"
+        android:textColor="#ff5900"
+        android:gravity="center"/>
+
+</FrameLayout>
