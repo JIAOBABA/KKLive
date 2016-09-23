@@ -68,8 +68,8 @@ public class LiveActivity extends AppCompatActivity implements CompoundButton.On
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_live);
-       // path = getIntent().getStringExtra("path");
-        path="http://pull.kktv8.com/livekktv/105834071.flv";
+        path = getIntent().getStringExtra("path");
+      //  path="http://pull.kktv8.com/livekktv/105834071.flv";
        // userid=getIntent().getStringExtra("id");
         dao=new UserDAO(this);
 //        String sql="select * from anchor where type=? and userid=?";

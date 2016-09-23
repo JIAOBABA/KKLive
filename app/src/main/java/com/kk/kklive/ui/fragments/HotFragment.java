@@ -1,5 +1,6 @@
 package com.kk.kklive.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,7 @@ import com.kk.kklive.adapters.HotHeaderAdapter;
 import com.kk.kklive.adapters.HotHeaderFragmentAdapter;
 import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Hot;
+import com.kk.kklive.ui.live.LiveActivity;
 import com.kk.kklive.views.PullToRefreshStickyListHeadersListView;
 import com.rock.teachlibrary.http.HttpUtil;
 
@@ -55,6 +57,10 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     private ViewPager mViewPager;
     private HotHeaderFragmentAdapter mHotHeaderFragmentAdapter;
 
+
+    DirectSeedingAdvertisement directSeedingAdvertisement;
+    Hot hot;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,7 +87,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
             public void onSuccess(String result) {
 
                 Gson gson = new Gson();
-                DirectSeedingAdvertisement directSeedingAdvertisement = gson.fromJson(result, DirectSeedingAdvertisement.class);
+                directSeedingAdvertisement = gson.fromJson(result, DirectSeedingAdvertisement.class);
                 List<DirectSeedingAdvertisement.ActivityListBean> activityList = directSeedingAdvertisement.getActivityList();
                 List<Fragment> data = new ArrayList<>();
                 for (int i = 0; i < activityList.size(); i++) {
@@ -106,7 +112,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
             @Override
             public void onSuccess(String result) {
                 Gson gson = new Gson();
-                Hot hot = gson.fromJson(result, Hot.class);
+                hot = gson.fromJson(result, Hot.class);
                 List<Hot.RoomListBean> roomList = hot.getRoomList();
                 mAdapter.updateRes(roomList);
             }
@@ -190,6 +196,11 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(), "被点击了"+position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "傻叼王飞"+position+"号", Toast.LENGTH_SHORT).show();
+        String liveStream = hot.getRoomList().get(position).getLiveStream();
+        Intent intent = new Intent(getActivity(), LiveActivity.class);
+        intent.putExtra("path",liveStream);
+        startActivity(intent);
+
     }
 }

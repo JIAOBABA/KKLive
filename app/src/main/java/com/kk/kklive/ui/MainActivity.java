@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, LiveActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, LiveActivity.class);
+//        startActivity(intent);
     }
 }
