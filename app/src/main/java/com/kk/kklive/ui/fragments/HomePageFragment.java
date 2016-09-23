@@ -176,7 +176,7 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
         Toast.makeText(getActivity(), "被点击"+position, Toast.LENGTH_SHORT).show();
     }
 
-    // 推荐列表的监听
+    // 推荐列表监听
     @Override
     public void onItemClick(int position) {
         String liveStream = mRoomList.get(position).getLiveStream();
