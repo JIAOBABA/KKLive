@@ -1,4 +1,4 @@
-package com.kk.kklive.ui.fragments;
+package com.kk.kklive.ui.directseeding.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,8 @@ import com.kk.kklive.adapters.ChannelAdapter;
 import com.kk.kklive.adapters.ChannelHeaderAdapter;
 import com.kk.kklive.constants.HttpConstant;
 import com.kk.kklive.model.Channel;
+import com.kk.kklive.ui.directseeding.RodLiveActivity;
+import com.kk.kklive.ui.fragments.BaseFragment;
 import com.kk.kklive.ui.live.LiveActivity;
 
 import org.xutils.common.Callback;
@@ -34,7 +36,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * 频道碎片
  * Created by fei on 2016/9/20.
  */
-public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,Handler.Callback, ChannelAdapter.OnItemClickListener {
+public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,Handler.Callback, ChannelAdapter.OnItemClickListener, ChannelHeaderAdapter.OnItemClickListener {
 
     private static final int UPDATE = 100;
     private static final long DELAYED_TIME = 3 * 1000;
@@ -114,6 +116,7 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
         mRecyclerView.setLayoutManager(layoutManager);
         mHeaderAdapter = new ChannelHeaderAdapter(getActivity(),null);
         mRecyclerView.setAdapter(mHeaderAdapter);
+        mHeaderAdapter.setListener(this);
         // 绑定头布局
         mStickyListHeadersListView.addHeaderView(mHeaderView);
         // 绑定脚布局
@@ -144,10 +147,30 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
     }
 
     @Override
-    public void onItemClick(int position) {
-        String liveStream = mPlateList.get(position / 4).getResult().get(position % 4).getLiveStream();
-        Intent intent = new Intent(getActivity(), LiveActivity.class);
-        intent.putExtra("path",liveStream);
+    public void onItemClick(int position,View v) {
+        switch (v.getId()) {
+            case R.id.item_channel_sticky_image:
+            case R.id.item_channel_sticky_image2:
+            case R.id.item_channel_sticky_image3:
+            case R.id.item_channel_sticky_image4:
+                String liveStream = mPlateList.get(position / 4).getResult().get(position % 4).getLiveStream();
+                Intent intent = new Intent(getActivity(), LiveActivity.class);
+                intent.putExtra("path",liveStream);
+                startActivity(intent);
+                break;
+            case R.id.item_channel_header_icon:
+                switch (position) {
+                    case 0:
+                        goActivity(RodLiveActivity.class);
+                        break;
+                }
+                break;
+        }
+
+    }
+
+    public void goActivity(Class cls){
+        Intent intent = new Intent(getActivity(), cls);
         startActivity(intent);
     }
 }

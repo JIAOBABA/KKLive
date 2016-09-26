@@ -90,7 +90,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RecommendActivity">
+        <activity android:name=".ui.directseeding.RecommendActivity">
+        </activity>
+        <activity android:name=".ui.directseeding.RodLiveActivity">
         </activity>
     </application>
 

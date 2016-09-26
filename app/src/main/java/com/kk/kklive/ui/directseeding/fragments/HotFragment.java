@@ -1,4 +1,4 @@
-package com.kk.kklive.ui.fragments;
+package com.kk.kklive.ui.directseeding.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import com.kk.kklive.adapters.HotAdapter;
 import com.kk.kklive.constants.HttpConstant;
 import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Hot;
+import com.kk.kklive.ui.fragments.BaseFragment;
 import com.kk.kklive.ui.live.LiveActivity;
 import com.kk.kklive.views.PullToRefreshStickyListHeadersListView;
 import com.qf.bannder.Banner;

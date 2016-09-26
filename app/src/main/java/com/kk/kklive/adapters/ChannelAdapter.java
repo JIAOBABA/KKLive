@@ -133,6 +133,10 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
         image2.setTag(position*4+1);
         image3.setTag(position*4+2);
         image4.setTag(position*4+3);
+        image.setTag(image);
+        image2.setTag(image2);
+        image3.setTag(image3);
+        image4.setTag(image4);
 
         return convertView;
     }
@@ -161,7 +165,8 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
     @Override
     public void onClick(View v) {
         Integer position = (Integer) v.getTag();
-        mListener.onItemClick(position);
+        ImageView image = (ImageView) v.getTag();
+        mListener.onItemClick(position,image);
     }
 
     /**
@@ -192,7 +197,7 @@ public class ChannelAdapter extends BaseAdapter implements StickyListHeadersAdap
     }
 
     public interface OnItemClickListener{
-        void  onItemClick(int position);
+        void  onItemClick(int position,View view);
     }
 
 }

@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import com.kk.kklive.R;
 import com.kk.kklive.adapters.DirectSeedingAdapter;
+import com.kk.kklive.ui.directseeding.fragments.ChannelFragment;
+import com.kk.kklive.ui.directseeding.fragments.HomePageFragment;
+import com.kk.kklive.ui.directseeding.fragments.HotFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -21,12 +21,17 @@ import java.util.Map;
 /**
  * Created by fei on 2016/9/21.
  */
-public class ChannelHeaderAdapter extends RecyclerView.Adapter<ChannelHeaderAdapter.ViewHolder> {
+public class ChannelHeaderAdapter extends RecyclerView.Adapter<ChannelHeaderAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Channel.PlateListBean> data;
     private LayoutInflater inflater;
+    private OnItemClickListener mListener;
 
-    public ChannelHeaderAdapter(Context context,List<Channel.PlateListBean> data) {
+    public void setListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public ChannelHeaderAdapter(Context context, List<Channel.PlateListBean> data) {
         inflater = LayoutInflater.from(context);
         if (data!=null) {
             this.data = data;
@@ -60,11 +65,20 @@ public class ChannelHeaderAdapter extends RecyclerView.Adapter<ChannelHeaderAdap
 
         title.setText(getItem(position).getTitle());
         x.image().bind(icon,"http://ures.kktv8.com/kktv"+getItem(position).getIcon());
+
+        icon.setOnClickListener(this);
+        icon.setTag(position);
     }
 
     @Override
     public int getItemCount() {
         return data!=null ? data.size() : 0;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Integer position = (Integer) v.getTag();
+        mListener.onItemClick(position,v);
     }
 
 
@@ -87,5 +101,9 @@ public class ChannelHeaderAdapter extends RecyclerView.Adapter<ChannelHeaderAdap
             }
             return view;
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(int position,View view);
     }
 }

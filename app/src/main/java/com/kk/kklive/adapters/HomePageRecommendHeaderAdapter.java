@@ -2,7 +2,6 @@ package com.kk.kklive.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,7 @@ import android.widget.TextView;
 
 import com.kk.kklive.R;
 import com.kk.kklive.model.Recommend;
-import com.kk.kklive.ui.RecommendActivity;
-import com.kk.kklive.ui.SplashActivity;
+import com.kk.kklive.ui.directseeding.RecommendActivity;
 
 import org.xutils.image.ImageOptions;
 import org.xutils.x;

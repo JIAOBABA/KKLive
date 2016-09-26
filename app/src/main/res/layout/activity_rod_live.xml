@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.directseeding.RecommendActivity">
+    tools:context="com.kk.kklive.ui.directseeding.RodLiveActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -22,13 +22,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="棒直播"/>
+            android:text="推荐"/>
 
     </FrameLayout>
 
-   <com.kk.kklive.views.PullToRefreshRecyclerView
-       android:id="@+id/recommend_refresh"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
+    <com.kk.kklive.views.PullToRefreshRecyclerView
+        android:id="@+id/recommend_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

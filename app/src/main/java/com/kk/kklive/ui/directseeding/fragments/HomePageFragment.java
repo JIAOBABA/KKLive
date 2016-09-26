@@ -1,4 +1,4 @@
-package com.kk.kklive.ui.fragments;
+package com.kk.kklive.ui.directseeding.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import com.kk.kklive.model.CityAnchor;
 import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Recommend;
 import com.kk.kklive.model.StarWars;
+import com.kk.kklive.ui.fragments.BaseFragment;
 import com.kk.kklive.ui.live.LiveActivity;
 import com.kk.kklive.views.StickyListView;
 import com.qf.bannder.Banner;
