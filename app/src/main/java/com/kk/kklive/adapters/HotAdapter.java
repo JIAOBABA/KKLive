@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kk.kklive.R;
+import com.kk.kklive.constants.HttpConstant;
 import com.kk.kklive.model.Hot;
 
 import org.xutils.image.ImageOptions;
@@ -102,7 +103,7 @@ public class HotAdapter extends BaseAdapter implements StickyListHeadersAdapter,
         TextView onLineCount1 = (TextView) holder.getViewRes(R.id.item_hot_online_count1);
         ImageView image1 = (ImageView) holder.getViewRes(R.id.item_hot_sticky_image);
 
-        x.image().bind(icon,"http://ures.kktv8.com/kktv"+getItem(2*position).getPortrait_path_256(),mOptions);
+        x.image().bind(icon, HttpConstant.IMAGE_BASE_PATH+getItem(2*position).getPortrait_path_256(),mOptions);
         roomTheme.setText(getItem(position * 2).getRoomTheme());
         nickName.setText(getItem(2*position).getNickname());
         onLineCount.setText(String.valueOf(getItem(2*position).getOnlineCount()));
@@ -112,7 +113,7 @@ public class HotAdapter extends BaseAdapter implements StickyListHeadersAdapter,
             image.setImageResource(R.mipmap.kk_most_hot_pressed);
         }
 
-        x.image().bind(icon1,"http://ures.kktv8.com/kktv"+getItem(position*2+1).getPortrait_path_256(),mOptions);
+        x.image().bind(icon1,HttpConstant.IMAGE_BASE_PATH+getItem(position*2+1).getPortrait_path_256(),mOptions);
         roomTheme1.setText(getItem(position * 2+1).getRoomTheme());
         nickName1.setText(getItem(position*2+1).getNickname());
         onLineCount1.setText(String.valueOf(getItem(position*2+1).getOnlineCount()));
