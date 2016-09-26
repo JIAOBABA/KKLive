@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/item_activity_recommend_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:id="@+id/item_activity_recommend_roomTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:singleLine="true"
+                android:layout_margin="3dp"
+                android:layout_gravity="bottom|left"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/item_activity_recommend_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/item_activity_recommend_sticky_image"
+                android:padding="5dp"
+                android:src="@mipmap/kk_most_hot_pressed"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+            <TextView
+                android:id="@+id/item_activity_recommend_online_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#ff5900"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
