@@ -1,6 +1,7 @@
 package com.kk.kklive.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.kk.kklive.R;
 import com.kk.kklive.model.Recommend;
+import com.kk.kklive.ui.RecommendActivity;
+import com.kk.kklive.ui.SplashActivity;
 
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
@@ -32,6 +35,7 @@ public class HomePageRecommendHeaderAdapter extends BaseAdapter implements Stick
     private LayoutInflater inflater;
     private ImageOptions mOptions;
     private OnItemClickListener mListener;
+    private Context mContext;
 
     public void setListener(OnItemClickListener listener) {
         mListener = listener;
@@ -44,6 +48,7 @@ public class HomePageRecommendHeaderAdapter extends BaseAdapter implements Stick
         }else {
             this.data = new ArrayList<>();
         }
+        mContext = context;
         mOptions = new ImageOptions.Builder()
                 .setSquare(true)
                 .setRadius(10)
@@ -130,6 +135,8 @@ public class HomePageRecommendHeaderAdapter extends BaseAdapter implements Stick
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+        ImageView more = (ImageView) holder.getViewRes(R.id.item_home_page_recommend_sticky_header_more);
+        more.setOnClickListener(this);
         return convertView;
     }
 
@@ -140,8 +147,18 @@ public class HomePageRecommendHeaderAdapter extends BaseAdapter implements Stick
 
     @Override
     public void onClick(View v) {
-        Integer position = (Integer) v.getTag();
-        mListener.onItemClick(position);
+        switch (v.getId()) {
+            case R.id.item_home_page_recommend_icon:
+            case R.id.item_home_page_recommend_icon1:
+                Integer position = (Integer) v.getTag();
+                mListener.onItemClick(position);
+                break;
+            case R.id.item_home_page_recommend_sticky_header_more:
+                Intent intent = new Intent(mContext, RecommendActivity.class);
+                mContext.startActivity(intent);
+                break;
+        }
+
     }
 
     class ViewHolder{

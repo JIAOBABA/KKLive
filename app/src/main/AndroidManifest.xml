@@ -70,7 +70,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name=".ui.MainActivity">
-
         </activity>
         <activity android:name=".ui.mine.SettingActivity">
         </activity>
@@ -90,6 +89,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.RecommendActivity">
         </activity>
     </application>
 
