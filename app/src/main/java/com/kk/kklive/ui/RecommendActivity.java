@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -24,7 +26,7 @@ import org.xutils.x;
 
 import java.util.List;
 
-public class RecommendActivity extends AppCompatActivity implements PullToRefreshBase.OnRefreshListener2,Handler.Callback, RecommendAdapter.OnItemClickListener {
+public class RecommendActivity extends AppCompatActivity implements PullToRefreshBase.OnRefreshListener2,Handler.Callback, RecommendAdapter.OnItemClickListener, View.OnClickListener {
 
     private static final String TAG = RecommendActivity.class.getSimpleName();
     private static final long DELAY_TIME = 3 * 1000;
@@ -38,6 +40,7 @@ public class RecommendActivity extends AppCompatActivity implements PullToRefres
     private int page;
     public static final String START_URL = "http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":1,\"c\":70036,\"FuncTag\":55000002,\"start\":";
     public static final String END_URL = ",\"offset\":14,\"platform\":2}";
+    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,8 @@ public class RecommendActivity extends AppCompatActivity implements PullToRefres
     private void initView() {
         mHandler = new Handler(this);
 
+        mImageView = (ImageView) findViewById(R.id.recommend_back);
+        mImageView.setOnClickListener(this);
         mRefresh = (PullToRefreshRecyclerView) findViewById(R.id.recommend_refresh);
         mRefresh.setMode(PullToRefreshBase.Mode.BOTH);
         mRefresh.setOnRefreshListener(this);
@@ -135,5 +140,10 @@ public class RecommendActivity extends AppCompatActivity implements PullToRefres
         Intent intent = new Intent(this, LiveActivity.class);
         intent.putExtra("path",liveStream);
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        finish();
     }
 }
