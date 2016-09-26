@@ -257,7 +257,7 @@ public class LiveActivity extends AppCompatActivity implements CompoundButton.On
         mBarrageLayout.setVisibility(View.VISIBLE);
 
 
-        String[] itemText = {"王飞好漂亮", "美", "王飞泥奏凯","王飞大傻叼","王飞大傻叼","王飞大傻叼", "王飞大傻叼"};
+        String[] itemText = {"主播加个好友", "美", "王飞泥奏凯","唱首歌","666666666","主播哪里人", "贼丑"};
         LinkedList<String> texts=new LinkedList<String>();
         for(int i=0;i<itemText.length;i++){
             texts.add(itemText[i]);
