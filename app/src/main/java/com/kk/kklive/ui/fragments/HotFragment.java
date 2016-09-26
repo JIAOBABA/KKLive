@@ -46,7 +46,6 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     private static final int UPDATE_RES = 100;
     private static final long DELAY_TIME = 3 * 1000;
     private static final int ADD_RES = 200;
-    private static final String TAG = HotFragment.class.getSimpleName();
     private PullToRefreshStickyListHeadersListView mRefresh;
     private StickyListHeadersListView mStickyListHeadersListView;
     private Handler mHandler;
@@ -174,7 +173,6 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
         radioGroup.setOnCheckedChangeListener(this);
         int x = (int) view.getX();
         int y = (int) view.getY();
-        Log.e(TAG, "onHeaderItemClick: "+x+"y"+y );
 
         if (mPopupWindow == null) {
             this.mPopupWindow = new PopupWindow(pop);

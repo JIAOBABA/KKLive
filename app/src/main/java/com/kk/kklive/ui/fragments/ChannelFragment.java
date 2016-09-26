@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.kk.kklive.R;
 import com.kk.kklive.adapters.ChannelAdapter;
 import com.kk.kklive.adapters.ChannelHeaderAdapter;
+import com.kk.kklive.constants.HttpConstant;
 import com.kk.kklive.model.Channel;
 import com.kk.kklive.ui.live.LiveActivity;
 
@@ -35,10 +36,8 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  */
 public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,Handler.Callback, ChannelAdapter.OnItemClickListener {
 
-    private static final String CHANNEL_URL = "http://www.kktv1.com/CDN/output/M/1/I/55000004/P/a-1_c-70036_platform-2/json.js";
     private static final int UPDATE = 100;
     private static final long DELAYED_TIME = 3 * 1000;
-    private static final String TAG = ChannelFragment.class.getSimpleName();
     private SwipeRefreshLayout mRefreshLayout;
     private StickyListHeadersListView mStickyListHeadersListView;
     private ChannelAdapter mAdapter;
@@ -62,7 +61,7 @@ public class ChannelFragment extends BaseFragment implements SwipeRefreshLayout.
     }
 
     private void setupView() {
-        RequestParams params = new RequestParams(CHANNEL_URL);
+        RequestParams params = new RequestParams(HttpConstant.CHANNEL_URL);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
 

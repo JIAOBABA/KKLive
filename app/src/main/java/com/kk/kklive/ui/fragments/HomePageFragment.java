@@ -13,6 +13,7 @@ import com.kk.kklive.R;
 import com.kk.kklive.adapters.HomePageAdapter;
 import com.kk.kklive.adapters.HomePageCityAnchorFooterAdapter;
 import com.kk.kklive.adapters.HomePageRecommendHeaderAdapter;
+import com.kk.kklive.constants.HttpConstant;
 import com.kk.kklive.model.CityAnchor;
 import com.kk.kklive.model.DirectSeedingAdvertisement;
 import com.kk.kklive.model.Recommend;
@@ -38,8 +39,6 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  */
 public class HomePageFragment extends BaseFragment implements OnBannerClickListener, HomePageRecommendHeaderAdapter.OnItemClickListener, HomePageCityAnchorFooterAdapter.OnItemClickListener {
 
-    private static final String HOMEPAGERECOMMEND_URL = "http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":1,\"c\":70036,\"FuncTag\":55000002,\"start\":0,\"offset\":14,\"platform\":2}";
-    private static final String STARWARS_URL = "http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":1,\"c\":70036,\"FuncTag\":10002011,\"platform\":2,\"userId\":112731886}";
     private StickyListHeadersListView mStickyListHeadersListView;
     private StickyListView mHeadersListView;
     private HomePageRecommendHeaderAdapter mHeaderAdapter;
@@ -66,7 +65,7 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
 
     private void setupView() {
         // 广告解析
-        RequestParams params2 = new RequestParams("http://www.kktv1.com/CDN/output/M/1440/I/10002006/P/a-1_c-70036_platform-2_isTop-1_version-79/json.js");
+        RequestParams params2 = new RequestParams(HttpConstant.ADVERTISEMENT_URL);
         x.http().get(params2, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -98,7 +97,7 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
         });
 
         // 推荐解析
-        RequestParams params = new RequestParams(HOMEPAGERECOMMEND_URL);
+        RequestParams params = new RequestParams(HttpConstant.HOME_PAGE_RECOMMEND_URL);
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
@@ -126,7 +125,7 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
         });
 
         // 周星争夺战解析
-        RequestParams params1 = new RequestParams(STARWARS_URL);
+        RequestParams params1 = new RequestParams(HttpConstant.STAR_WARS_URL);
         x.http().get(params1, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -153,7 +152,7 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
         });
 
         // 同城主播解析
-        RequestParams params3 = new RequestParams("http://api.kktv1.com:8080/meShow/entrance?parameter={\"a\":2,\"c\":70036,\"FuncTag\":20010401,\"start\":0,\"offset\":4,\"gender\":-1,\"cityName\":\"%E6%B5%B7%E6%B7%80nbsp%E5%8C%97%E4%BA%ACnbsp%E5%8C%97%E4%BA%AC\",\"platform\":2}");
+        RequestParams params3 = new RequestParams(HttpConstant.CITY_ANCHOR_URL);
         x.http().get(params3, new Callback.CommonCallback<String>() {
 
             @Override
@@ -214,7 +213,7 @@ public class HomePageFragment extends BaseFragment implements OnBannerClickListe
     // 图片监听
     @Override
     public void OnBannerClick(int position) {
-        Toast.makeText(getActivity(), "被点击"+position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "图片被点击"+position, Toast.LENGTH_SHORT).show();
     }
 
     // 推荐列表监听

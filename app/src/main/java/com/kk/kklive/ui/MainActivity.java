@@ -31,7 +31,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        Toast.makeText(MainActivity.this, "yzh is a big sb", Toast.LENGTH_LONG).show();
     }
 
     private void initView() {
