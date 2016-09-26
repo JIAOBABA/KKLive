@@ -215,7 +215,7 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
     // 头布局监听事件
     @Override
     public void OnBannerClick(int position) {
-        Toast.makeText(getActivity(), "图片被点击"+position, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "图片被点击"+position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -224,14 +224,26 @@ public class HotFragment extends BaseFragment implements PullToRefreshBase.OnRef
             case R.id.hot_pop_popular_anchor:
                 goHttp(HttpConstant.POPULAR_ANCHOR_URL);
                 mText.setText("人气主播");
+                if (mPopupWindow!=null&&mPopupWindow.isShowing()) {
+                    mPopupWindow.dismiss();
+                    mPopupWindow = null;
+                }
                 break;
             case R.id.hot_pop_star_rating:
                 goHttp(HttpConstant.STAR_RATING_URL);
                 mText.setText("明星等级");
+                if (mPopupWindow!=null&&mPopupWindow.isShowing()) {
+                    mPopupWindow.dismiss();
+                    mPopupWindow = null;
+                }
                 break;
             case R.id.hot_pop_recently_launched:
                 goHttp(HttpConstant.RECENTLY_LAUNCHED_URL);
                 mText.setText("最近开播");
+                if (mPopupWindow!=null&&mPopupWindow.isShowing()) {
+                    mPopupWindow.dismiss();
+                    mPopupWindow = null;
+                }
                 break;
         }
     }
